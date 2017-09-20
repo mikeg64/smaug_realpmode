@@ -70,7 +70,11 @@ close,1
 ;openr,1,'/fastdata/cs1mkg/smaug/spic6b0_3d/zerospic1__879000.out'
 ;openr,1,'/fastdata/cs1mkg/smaug/fastdata/cs1mkg/smaug/spic6b2_3/zerospic1__257000.out'
 
-openr,1,'/fastdata/cs1mkg/smaug/spic256_5b2_2/zerospic1__1280000.out'
+;openr,1,'/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/zerospic1__285000.out'
+openr,1,'/fastdata/cs1mkg/smaug/spic_5b2_2/zerospic1__470000.out'
+;openr,1,'/fastdata/cs1mkg/smaug/spic5b2_2_tube1/zerospic1__470000.out'
+
+
 ;openr,1,'/fastdata/cs1mkg/smaug/spic4p35a_0_0_3d/zerospic1__255000.out'
 ;openr,1,'/fastdata/cs1mkg/smaug/spic2p05a_0_2_3d/zerospic1__440000.out'
 ;openr,1,'/data/cs1mkg/smaug_pmode/configs/3D_128_spic_bin.ini',/f77_unf
@@ -203,7 +207,9 @@ close,1
 ;openw,1,'/fastdata/cs1mkg/smaug/spic1p79a_0_0_3d/zerospic1_asc_879000.ini'
 ;openw,1,'/data/cs1mkg/smaug_pmode/configs/3D_128_spic_ptb_asc.ini'
 ;openw,1,'../configs/3D_128_2p5_2p5_12p5_spru_asco.ini'
-openw,1,'/fastdata/cs1mkg/smaug/spic256_5b2_2/zerospic1_asc_1280000.ini'
+;openw,1,'/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/zerospic1_asc_285000.ini'
+openw,1,'/fastdata/cs1mkg/smaug/spic_5b2_2/zerospic1_asc_470000.ini'
+;openw,1,'/fastdata/cs1mkg/smaug/spic5b2_2_tube1/zerospic1_asc_427000.ini'
 
 
 ;openw,1,'//data/cs1mkg/smaugtemp/smaug/out/sedov_asc_118000.ini'

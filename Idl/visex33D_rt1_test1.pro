@@ -62,7 +62,7 @@ dumd=long(1)
 ;mpegID = MPEG_OPEN([700,1200],FILENAME='myMovie.mpg') 
 
 window, 0,xsize=1025,ysize=1025,XPOS = 950, YPOS = 300 
-window, 1,xsize=800,ysize=800,XPOS = 500, YPOS = 80
+;window, 1,xsize=800,ysize=800,XPOS = 500, YPOS = 80
 
 
 
@@ -109,10 +109,17 @@ close,2
 
 ;openr,1,'/home/mikeg/proj/sac2.5d-cuda/test_OT.out'
 ;directory='/home/mikeg/proj/sac2.5d-cuda/out_OT_withhyper/'
-directory='../out/'
+;directory='../out/'
+;directory='/fastdata/cs1mkg/smaug/spic5b2_2_tube1/'
+;directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/'
+directory='/fastdata/cs1mkg/smaug/spic_5b2_2/'
+
+
 ;pic=999
 ;name='zeroOT_'
-name='3D_atubet1slow_128_128_128_final_'
+;name='3D_atubet1slow_128_128_128_final_'
+name='zerospic1__'
+
 ;ndim=2
 ;n1=800
 ;n2=6
@@ -300,7 +307,7 @@ zze=zz[zend]
 ;close, 10	
 	
 
-tvframe,rotate(wy(*,*,2)/(wy(*,*,0)+wy(*,*,9)),1),/sample, /bar,title='Vx', $
+tvframe,rotate(wt(*,*,1)/(wy(*,*,0)+wy(*,*,9)),1),/sample, /bar,title='Vz', $
         xtitle='y', ytitle='z',charsize=2.0;, CT='dPdT'
 	
 
@@ -310,11 +317,22 @@ tvframe,rotate(wt(*,*,4),1),/bar, /sample, title='e', xtitle='x', ytitle='z', $
 tvframe,rotate(wt(*,*,5),1)*sqrt(mu)*1.0e4,/bar,/sample, title='bz', $
         xtitle='x', ytitle='z', charsize=2.0
 
-tvframe,rotate(wt(*,*,11),1)*sqrt(mu)*1.0e4,/bar,/sample, title='Bx_b', $
+;tvframe,rotate(wt(*,*,11),1)*sqrt(mu)*1.0e4,/bar,/sample, title='Bx_b', $
+ ;       xtitle='x', ytitle='z', charsize=2.0
+
+tvframe,rotate(wt(*,*,6),1)*sqrt(mu)*1.0e4,/bar,/sample, title='Bx', $
         xtitle='x', ytitle='z', charsize=2.0
 
-tvframe,rotate(wt(*,*,12),1)*sqrt(mu)*1.0e4,/bar,/sample, title='By_b', $
+
+
+
+;tvframe,rotate(wt(*,*,12),1)*sqrt(mu)*1.0e4,/bar,/sample, title='By_b', $
+;        xtitle='x', ytitle='z', charsize=2.0
+
+tvframe,rotate(wt(*,*,7),1)*sqrt(mu)*1.0e4,/bar,/sample, title='By', $
         xtitle='x', ytitle='z', charsize=2.0
+
+
 
 tvframe,rotate(wt(*,*,8),1),/bar,/sample, title='eb', $
         xtitle='x', ytitle='z', charsize=2.0
