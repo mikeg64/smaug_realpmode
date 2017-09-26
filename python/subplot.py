@@ -106,7 +106,7 @@ print size(alldat)
 print shape(alldat)
 
 
-# In[23]:
+# In[31]:
 
 x=alldat[0,:,:,:]
 y=alldat[1,:,:,:]
@@ -128,8 +128,8 @@ dens=alldat[0,:,:,:]
 X=alldat[0,64,:,:]/1.0e6
 Y=alldat[1,64,:,:]/1.0e6
 vx=alldat[4,64,:,:]/(alldat[3,64,:,:]+alldat[12,64,:,:])
-vy=alldat[5,64,:,:]/(alldat[3,64,:,:]+alldat[12,64,:,:])
-vz=alldat[6,64,:,:]/(alldat[3,64,:,:]+alldat[12,64,:,:])
+vy=100000*alldat[5,64,:,:]/(alldat[3,64,:,:]+alldat[12,64,:,:])
+vz=100000*alldat[6,64,:,:]/(alldat[3,64,:,:]+alldat[12,64,:,:])
 rho=(alldat[3,64,:,:])*1.0e12
 e=alldat[7,64,:,:]
 #vx=alldat[4,64,:,:]
@@ -146,11 +146,11 @@ bz=alldat[10,64,:,:]*sqrt(mu)*1.0e4
 # A working example!
 # https://matplotlib.org/examples/mplot3d/mixed_subplots_demo.html
 
-# In[24]:
+# In[32]:
 
-fig = plt.figure()
+fig = plt.figure(figsize=(15,30))
 
-ax = fig.add_subplot(2, 4, 1, projection='3d', title='Vz')
+ax = fig.add_subplot(4, 2, 1, projection='3d', title='Vz')
 
 
 surf = ax.plot_surface(X, Y, vx, rstride=1, cstride=1, cmap=cm.coolwarm,
@@ -161,10 +161,10 @@ fig.colorbar(surf, shrink=0.5, aspect=5)
 
 
 
-abz = fig.add_subplot(2, 4, 2, projection='3d', title='Bz')
+abz = fig.add_subplot(4, 2, 2, projection='3d', title='Bz')
 
 
-surfbz = abx.plot_surface(X, Y, bz, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfbz = abx.plot_surface(X, Y, bx, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 abz.view_init(elev=90,azim=0) 
@@ -172,7 +172,7 @@ fig.colorbar(surfbz, shrink=0.5, aspect=5)
 
 
 
-ae = fig.add_subplot(2, 4, 3, projection='3d', title='E')
+ae = fig.add_subplot(4, 2, 3, projection='3d', title='E')
 
 
 surfe = ae.plot_surface(X, Y, e, rstride=1, cstride=1, cmap=cm.coolwarm,
@@ -185,7 +185,7 @@ fig.colorbar(surfe, shrink=0.5, aspect=5)
 
 
 
-arho = fig.add_subplot(2, 4, 4, projection='3d', title='rho')
+arho = fig.add_subplot(4, 2, 4, projection='3d', title='rho')
 
 
 surfrho = arho.plot_surface(X, Y, rho, rstride=1, cstride=1, cmap=cm.coolwarm,
@@ -197,20 +197,20 @@ fig.colorbar(surfrho, shrink=0.5, aspect=5)
 
 
 
-avx = fig.add_subplot(2, 4, 5, projection='3d', title='Vx')
+avx = fig.add_subplot(4, 2, 5, projection='3d', title='Vx')
 
 
-surfvx = arho.plot_surface(X, Y, vx, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfvx = arho.plot_surface(X, Y, vy, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 avx.view_init(elev=90,azim=0) 
 fig.colorbar(surfvx, shrink=0.5, aspect=5)
 
 
-avy = fig.add_subplot(2, 4, 6, projection='3d', title='Vy')
+avy = fig.add_subplot(4, 2, 6, projection='3d', title='Vy')
 
 
-surfvy = arho.plot_surface(X, Y, vy, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfvy = arho.plot_surface(X, Y, vz, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 avy.view_init(elev=90,azim=0) 
@@ -219,10 +219,10 @@ fig.colorbar(surfvy, shrink=0.5, aspect=5)
 
 
 
-abx = fig.add_subplot(2, 4, 7, projection='3d', title='Bx')
+abx = fig.add_subplot(4, 2, 7, projection='3d', title='Bx')
 
 
-surfbx = abx.plot_surface(X, Y, bx, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfbx = abx.plot_surface(X, Y, by, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 abx.view_init(elev=90,azim=0) 
@@ -231,10 +231,10 @@ fig.colorbar(surfbx, shrink=0.5, aspect=5)
 
 
 
-aby = fig.add_subplot(2, 4, 8, projection='3d', title='By')
+aby = fig.add_subplot(4, 2, 8, projection='3d', title='By')
 
 
-surfby = aby.plot_surface(X, Y, by, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfby = aby.plot_surface(X, Y, bz, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 aby.view_init(elev=90,azim=0) 
