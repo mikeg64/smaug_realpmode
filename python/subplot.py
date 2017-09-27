@@ -17,14 +17,15 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 
 
 # In[2]:
 
-#file = open('/fastdata/cs1mkg/smaug/spic5b2_2_tube1/zerospic1__761000.out','rb')
-file = open('/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1__177000.out','rb')
+file = open('/fastdata/cs1mkg/smaug/spic5b2_2_tube1/zerospic1__761000.out','rb')
+#file = open('/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1__177000.out','rb')
 #file = open('/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/zerospic1__469000.out','rb')
+#file = open('/fastdata/cs1mkg/smaug/spic_5b2_2/zerospic1__617000.out','rb')
 
 
 
@@ -164,7 +165,7 @@ fig.colorbar(surf, shrink=0.5, aspect=5)
 abz = fig.add_subplot(4, 2, 2, projection='3d', title='Bz')
 
 
-surfbz = abx.plot_surface(X, Y, bx, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfbz = abz.plot_surface(X, Y, bx, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 abz.view_init(elev=90,azim=0) 
@@ -200,7 +201,7 @@ fig.colorbar(surfrho, shrink=0.5, aspect=5)
 avx = fig.add_subplot(4, 2, 5, projection='3d', title='Vx')
 
 
-surfvx = arho.plot_surface(X, Y, vy, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfvx = avx.plot_surface(X, Y, vy, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 avx.view_init(elev=90,azim=0) 
@@ -210,7 +211,7 @@ fig.colorbar(surfvx, shrink=0.5, aspect=5)
 avy = fig.add_subplot(4, 2, 6, projection='3d', title='Vy')
 
 
-surfvy = arho.plot_surface(X, Y, vz, rstride=1, cstride=1, cmap=cm.coolwarm,
+surfvy = avy.plot_surface(X, Y, vz, rstride=1, cstride=1, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 avy.view_init(elev=90,azim=0) 
