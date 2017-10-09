@@ -125,12 +125,6 @@ res=exp(-1.d0*(x/x0)^1.0d0)
 return,res
 end
 
-function par5,x,x0
-
-res=exp(-1.d0*((x+abs(min(x)))/x0)^0.95d0)
-
-return,res
-end
 
 function inte ,f,dx
 nel=n_elements(f)
@@ -156,17 +150,6 @@ endif
 return,res
 end
 
-PRO gfunct, X, A, F, pder  
-  bx = EXP(A[1] * X)  
-  F = A[0] * bx + A[2]  
-  
-;If the procedure is called with four parameters, calculate the  
-;partial derivatives.  
-  IF N_PARAMS() GE 4 THEN $  
-    pder = [[bx], [A[0] * X * bx], [replicate(1.0, N_ELEMENTS(X))]]  
-END
-
-
 DEVICE, PSEUDO=8, DECOMPOSED=0, RETAIN=2
 WINDOW, /FREE, /PIXMAP, COLORS=256 & WDELETE, !D.WINDOW
 PRINT, 'Date:      ', systime(0)
@@ -177,7 +160,7 @@ PRINT, 'table_size ', STRCOMPRESS(!D.TABLE_SIZE,/REM)
 window, 0,xsize=1025,ysize=300,XPOS = 700, YPOS = 900 
 window, 1,xsize=600,ysize=300,XPOS = 100, YPOS = 900 
 window, 2,xsize=600,ysize=600,XPOS = 50, YPOS = 500 
-window, 4,xsize=900,ysize=600,XPOS = 1000, YPOS = 500 
+window, 4,xsize=900,ysize=600,XPOS = 300, YPOS = 500 
 ;***************
 headline='                                                                               '
 it=long(1)
@@ -224,7 +207,7 @@ endfor
 print, n1,n2,n3
 
 ;*************************************************
-
+;stop
 yy=49
 
 gamma=1.66666667d0
@@ -287,284 +270,34 @@ d_z=0.2d0 ; width of Gaussian in Mm
 z_shift=0.d0 ; shift in Mm
 A=0.05d0 ; amplitude
 
-;d_z=0.5d0 ; width of Gaussian in Mm
-;z_shift=-0.1d0 ; shift in Mm
-;A=0.05d0 ; amplitude
+for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
+
+;for i=0,n1-1 do b0z[i]=par3((z[i]/scale-z_shift),d_z)
+
+;zc=0.2d0
+;for i=0,n1-1 do b0z[i]=1.d0-((atan((z[i]/max(z)-zc)*15.d0))+!Pi/2.d0)/!Pi
+
 
 wset,2
 !p.multi = [0,2,2,0,1]
-
-;********** configuration of B0z magnetic field
-
-;;;;;;;; numerical configuration
- 
- 
- 
- 
-for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
-
-
-
-;for i=0,n1-1 do b0z[i]=par5((z[i]/scale-z_shift),d_z)
-
 
 plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
 
 ;for i=n1-2,0,-1 do b0z[i]=b0z[i]+b0z[i+1]
 
-Bmax=0.15d0  ; mag field Tesla
+Bmax=0.00010d0  ; mag field Tesla 10G
+;Bmax=0.010d0  ; mag field Tesla
 ;Bmin=0.0006d0  ; mag field Tesla
-Bmin=0.0002d0  ; mag field Tesla
-
-
-bnmin=min(b0z)
-bnmax=max(b0z)
-
-for i=0,n1-1 do $
-b0z[i]=(Bmax-Bmin)/(bnmax-bnmin)*(b0z[i]-bnmin)+Bmin
-
-plot, z/scale, b0z, title='b0z_sum', charsize=1.2, xtitle='[Mm]'
-
-;tb0z=b0z
-
-;save, filename='z_b0z.sav', z,tb0z
-restore, 'z_b0z.sav' 
-tek_color
-oplot, z/scale, tb0z, color=3
-
-
-stop
-;;;;;;;; end of numerical configuration
-
-;;;;;;; from file
-restore, 'bax.sav' ;zax, BZZ
-;;;;;;; end from file
-
-zax=zax/100.d0 ; meter
-
-zax_n=dblarr(35)
-BZZ_n=dblarr(35)
-zax_n=zax(65:99)
-BZZ_n=BZZ(65:99)
-
-
-
-
-BZZ_n1=dblarr(n1)
-weights=1.d0/BZZ_n
-A = [100.0,-0.000001,1.0]
-yfit=curvefit(zax_n, BZZ_n, weights, A,SIGMA, FUNCTION_NAME='gfunct')
-
-BZZ_n1(*)=A[0]*exp(A[1]*x_code(*,1,1,0))+A[2]
-!P.multi=0
-plot, x_code(*,1,1,0)/1.e6, BZZ_n1
-tek_color
-oplot,zax_n/1.e6, BZZ_n, color=3
-
-BZZ_n1_min=327.d0
-
-;BZZ_n1=(BZZ_n1-BZZ_n1_min)/10000.d0
-
-BZZ_n1=BZZ_n1
-plot, x_code(*,1,1,0),BZZ_n1(*)
-
-;b0z=BZZ_n1
-;********** end of configuration of B0z magnetic field
-;tek_color
-;plot,z,b0z*10000.d0
-
-;oplot,zax_n,BZZ_n, color=red
-
-;save, filename='z_b0z.sav', z,b0z
-
-dbz=deriv1(b0z,z)
-
-xf=dblarr(n1,n2,n3)
-
-
-;xr=0.20d5
-;yr=0.20d5
-
-
-xr=0.10d6
-yr=0.10d6
-
-R2=(xr^2.d0+yr^2.d0)
-
-A=R2/2.d0
-
-for k=0,n3-1 do begin 
-for j=0,n2-1 do begin
-for i=0,n1-1 do begin
-
-f=(x[j]^2.d0+y[k]^2.d0)/R2
-
-xf[i,j,k]=exp(-f)
-
-endfor
-endfor
-endfor
-
-;x0=100.d0
-
-;for k=0,n3-1 do begin 
-;for j=0,n2-1 do begin
-;for i=0,n1-1 do begin
-
-;f=sqrt((x[j]^2.d0+y[k]^2.d0)*b0z(i)/R2)
-
-;xf[i,j,k]=par3(f,x0)
-
-;endfor
-;endfor
-;endfor
-
-;xf=xf/max(xf)
-
-
-dbz=deriv1(b0z,z)
-
-b0zz=0.0001d0
-
-for i=0,n1-1 do begin
-for k=0,n3-1 do begin 
-for j=0,n2-1 do begin
-
-bz(i,j,k)=b0zz*xf[i,j,k]
-bx(i,j,k)=0.d0
-by(i,j,k)=0.d0
-
-endfor
-endfor
-endfor
-
-wset,4
-!p.multi = [0,3,2,0,1]
-
-hh=49
-cs=1.6
-
-hight=strTrim(string(hh),1)
-tvframe, by(hh,*,*), title='by h='+hight, /bar,  CT='rho0',charsize=cs
-tvframe, bx(hh,*,*), title='bx h='+hight, /bar,  CT='rho0',charsize=cs
-tvframe, bz(*,*,yy), title='bz', /bar,  CT='rho0',charsize=cs
-tvframe, xf(*,*,yy), title='xf', /bar,  CT='rho0', $
-         xtitle='x [Mm]', ytitle='z [Mm]',charsize=cs, $ 
-         xrange=[min(z)/scale, max(z)/scale], $
-	 yrange=[min(x)/scale, max(x)/scale]
-tvframe, by(*,yy,*), title='by', /bar,  CT='rho0',charsize=cs
-tvframe, bx(*,*,yy), title='bx', /bar,  CT='rho0',charsize=cs
-
-stop
-
-bb=(bx^2.0+by^2.0+bz^2.0)/2.0/mu
-
-
-
-;plot, alog10((gamma-1.d0)*bb(*,n2/2,n3/2)), title='alog(P_B)',  charsize=1.0
-;oplot, alog10(p(*,yy,yy)), psym=4
+;Bmin=0.0005d0  ; mag field Tesla 50G
+Bmin=0.0001d0  ; mag field Tesla 1G
 
 ; ************** convert to VAC magnetic field
 
 bx(*,*,*)=bx(*,*,*)/sqrt(mu)
 by(*,*,*)=by(*,*,*)/sqrt(mu)
-bz(*,*,*)=bz(*,*,*)/sqrt(mu)
+bz(*,*,*)=Bmax*bz(*,*,*)/sqrt(mu)
 
 ;*********************************************
-
-; ************ field line ***************
-
-;line2_b_classic, reform(bx(*,*,yy)),reform(bz(*,*,yy)),x, z, 0 , 1.d6
-
-print, 'Radius='+sqrt(R2)
-
-
-dbzdx=dblarr(n1,n2,n3)
-dbxdx=dblarr(n1,n2,n3)
-dbydx=dblarr(n1,n2,n3)
-
-dbzdy=dblarr(n1,n2,n3)
-dbxdy=dblarr(n1,n2,n3)
-dbydy=dblarr(n1,n2,n3)
-
-dbzdz=dblarr(n1,n2,n3)
-dbxdz=dblarr(n1,n2,n3)
-dbydz=dblarr(n1,n2,n3)
-
-
-
-print,'dz'
-for k=0,n3-1 do begin
-for j=0,n2-1 do begin
- dbzdz(*,j,k)=deriv1(bz(*,j,k),z)
-endfor
-endfor
-
-print,'dx'
-for k=0,n3-1 do begin
-for i=0,n1-1 do begin
- dbxdx(i,*,k)=deriv1(bx(i,*,k),x)
-endfor
-endfor
-
-print,'dy'
-for j=0,n2-1 do begin
-for i=0,n1-1 do begin
- dbydy(i,j,*)=deriv1(by(i,j,*),y)  
-endfor
-endfor
-
-
-divb=dbzdz+dbxdx+dbydy
-print,'divB max=', max(divb)
-
-bxby=dblarr(n1,n2,n3)
-dbxbydy=dblarr(n1,n2,n3)
-bxby=bx*by
-
-for j=0,n2-1 do begin
-for i=0,n1-1 do begin
- dbxbydy(i,j,*)=deriv1(bxby(i,j,*),y)
-endfor
-endfor
-
-print,'dBxBydy'
-
-bxbz=dblarr(n1,n2,n3)
-dbxbzdz=dblarr(n1,n2,n3)
-bxbz=bx*bz
-
-for j=0,n2-1 do begin
-for k=0,n3-1 do begin
- dbxbzdz(*,j,k)=deriv1(bxbz(*,j,k),z)
-endfor
-endfor
-
-print,'dBxBzdz'
-
-bxby=dblarr(n1,n2,n3)
-dbxbydx=dblarr(n1,n2,n3)
-bxby=bx*by
-
-for i=0,n1-1 do begin
-for k=0,n3-1 do begin
- dbxbydx(i,*,k)=deriv1(bxby(i,*,k),x)
-endfor
-endfor
-
-print,'dBxBydx'
-
-bybz=dblarr(n1,n2,n3)
-dbybzdz=dblarr(n1,n2,n3)
-bybz=by*bz
-
-for j=0,n2-1 do begin
-for k=0,n3-1 do begin
- dbybzdz(*,j,k)=deriv1(bybz(*,j,k),z)
-endfor
-endfor
-
-print,'dByBzdz'
 
 ;tvframe, divb(20,*,*), title='divb',/bar, charsize=1.0
 
@@ -572,98 +305,12 @@ print,'dByBzdz'
 ;tvframe,p-(gamma-1.d0)*(bx^2.0+bz^2.0)/2.0, title='delta p', charsize=1.8, /bar
 ;print, 'min p=',min(p-(gamma-1.d0)*(bx^2.0+bz^2.0)/2.0)
 
-;************* BEGIN INTEGRATION ****************************
-F=dbxbydy+dbxbzdz
-Bvarix=dblarr(n1,n2,n3)
-
-G=dbxbydx+dbybzdz
-Bvariy=dblarr(n1,n2,n3)
-
-for i=0,n1-1 do begin
-
-for kx=0,n3-1 do begin
-  for jx=0,n2-1 do begin
-   sum=inte(reform(F[i,0:jx,kx]),x(1)-x(0)) 
-  Bvarix(i,jx,kx)=sum
- endfor
-endfor
-
-for jy=0,n2-1 do begin
-  for ky=0,n3-1 do begin
-   sum=inte(reform(G[i,jy,0:ky]),y(1)-y(0)) 
-  Bvariy(i,jy,ky)=sum
- endfor
-endfor
-print, 'Ix Iy ', i
-
-endfor
-
-;************* END INTEGRATION ****************************
-
-Bvari=(Bvarix+Bvariy)/2.d0-bz^2.d0/2.d0
-
-
-dpdz=dblarr(n1,n2,n3)
-
-for j=0,n2-1 do begin
-for k=0,n3-1 do begin
- dpdz(*,j,k)=deriv1(Bvari(*,j,k),z)
-endfor
-endfor
-
-
-print,'dBxByBzdz'
-
-bxbybz=dblarr(n1,n2,n3)
-dbxbybzdz=dblarr(n1,n2,n3)
-bxbybz=(bx*bx+by*by-bz*bz)/2.d0
-
-for j=0,n2-1 do begin
-for k=0,n3-1 do begin
- dbxbybzdz(*,j,k)=deriv1(bxbybz(*,j,k),z)
-endfor
-endfor
-
-print,'dBxBzdx'
-
-bxbz=dblarr(n1,n2,n3)
-dbxbzdx=dblarr(n1,n2,n3)
-bxbz=bx*bz
-
-for i=0,n1-1 do begin
-for k=0,n3-1 do begin
- dbxbzdx(i,*,k)=deriv1(bxbz(i,*,k),x)
-endfor
-endfor
-
-print,'dByBzdy'
-
-bybz=dblarr(n1,n2,n3)
-dbybzdy=dblarr(n1,n2,n3)
-bybz=by*bz
-
-for i=0,n1-1 do begin
-for j=0,n2-1 do begin
- dbybzdy(i,j,*)=deriv1(bybz(i,j,*),y)
-endfor
-endfor
-
 
 rho1=dblarr(n1,n2,n3)
 
-print, 'rho'
-for i=0,n1-1 do begin
-for j=0,n2-1 do begin
-for k=0,n3-1 do begin
- rho1[i,j,k]=(dbxbybzdz[i,j,k]-dbxbzdx[i,j,k]- $
-              dbybzdy[i,j,k]+dpdz[i,j,k])/ggg
-endfor
-endfor
-endfor
 
-
+rho1=0
 p=dblarr(n1,n2,n3)
-p=bvari
 
 rho1=rho+rho1
 
@@ -673,6 +320,7 @@ for j=0,n2-1 do begin
 for k=0,n3-1 do begin
 
 p(i,j,k)=p(i,j,k)+w(i,j,k,8)*(gamma-1.d0)
+bz(i,j,k)=Bmax/sqrt(mu)
 
 endfor
 endfor
@@ -681,7 +329,7 @@ endfor
 
 beta=(bx^2.d0+by^2.d0+bz^2.d0)/2.d0/p
 
-tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar, CT='VpVd'
+tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar;CT='VpVd'
 contour, beta(*,*,yy), LEVELS = [0.001,0.01,0.1,1.0, 10.0], $
          C_Annotation = ['1000.0','100.0','10.0','1.0','0.1'], /overplot,/follow
 	 
@@ -696,7 +344,7 @@ T=mu_gas*p/R/rho1
 tvframe,T(*,*,yy), charsize=1.2, title='T', /bar	 	 
 
 
-stop
+;stop
 
 ;lower boundary
 
@@ -732,14 +380,23 @@ w(*,*,*,8)=e
 ;w(*,*,*,11)=rotate(by,-1)
 ;w(*,*,*,12)=rotate(bx,-1)
 
-w(*,*,*,10)=bz
-w(*,*,*,11)=bx
-w(*,*,*,12)=by
+;w(*,*,*,10)=bz
+;w(*,*,*,11)=bx
+;w(*,*,*,12)=by
+
+w(*,*,*,5)=bz
+w(*,*,*,6)=bx
+w(*,*,*,7)=by
+
+
 
 tvframe, w(*,*,yy,0)+w(*,*,yy,9), /bar, charsize=1.5, title='rho_t' 
-tvframe, w(*,*,yy,10), title='bz', /bar, charsize=1.5
-tvframe, w(*,*,yy,11), title='bx', /bar, charsize=1.5
-tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
+;tvframe, w(*,*,yy,10), title='bz', /bar, charsize=1.5
+;tvframe, w(*,*,yy,11), title='bx', /bar, charsize=1.5
+;tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
+tvframe, w(*,*,yy,5), title='bz', /bar, charsize=1.5
+tvframe, w(*,*,yy,6), title='bx', /bar, charsize=1.5
+tvframe, w(*,yy,*,7), title='by', /bar, charsize=1.5
 
 
 
@@ -758,7 +415,7 @@ tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
 ;qq=dbzdz+dbxdx
 ;goto, wwww
 close,1
-openw,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_bverttube_bin.ini',/f77_unf
+openw,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_bvert10G_bin.ini',/f77_unf
 writeu,1,headline
 writeu,1,it,time,ndim,neqpar,nw
 writeu,1,nx

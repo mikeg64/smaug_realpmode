@@ -125,12 +125,6 @@ res=exp(-1.d0*(x/x0)^1.0d0)
 return,res
 end
 
-function par5,x,x0
-
-res=exp(-1.d0*((x+abs(min(x)))/x0)^0.95d0)
-
-return,res
-end
 
 function inte ,f,dx
 nel=n_elements(f)
@@ -156,17 +150,6 @@ endif
 return,res
 end
 
-PRO gfunct, X, A, F, pder  
-  bx = EXP(A[1] * X)  
-  F = A[0] * bx + A[2]  
-  
-;If the procedure is called with four parameters, calculate the  
-;partial derivatives.  
-  IF N_PARAMS() GE 4 THEN $  
-    pder = [[bx], [A[0] * X * bx], [replicate(1.0, N_ELEMENTS(X))]]  
-END
-
-
 DEVICE, PSEUDO=8, DECOMPOSED=0, RETAIN=2
 WINDOW, /FREE, /PIXMAP, COLORS=256 & WDELETE, !D.WINDOW
 PRINT, 'Date:      ', systime(0)
@@ -177,7 +160,7 @@ PRINT, 'table_size ', STRCOMPRESS(!D.TABLE_SIZE,/REM)
 window, 0,xsize=1025,ysize=300,XPOS = 700, YPOS = 900 
 window, 1,xsize=600,ysize=300,XPOS = 100, YPOS = 900 
 window, 2,xsize=600,ysize=600,XPOS = 50, YPOS = 500 
-window, 4,xsize=900,ysize=600,XPOS = 1000, YPOS = 500 
+window, 4,xsize=900,ysize=600,XPOS = 300, YPOS = 500 
 ;***************
 headline='                                                                               '
 it=long(1)
@@ -190,8 +173,8 @@ dum=long(1)
 dumd=long(1)
 nn=0
 close,1
+;openr,1,'/data/ap1vf/3D_196_100_100.ini',/f77_unf
 openr,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_bin.ini',/f77_unf
-
 
 ;*****************************************************
 
@@ -213,6 +196,7 @@ n3=nx(2)
 x_code=dblarr(n1,n2,n3,ndim)
 w=dblarr(n1,n2,n3,nw)
 
+
 wi=dblarr(n1,n2,n3)
 
 readu,1,x_code
@@ -224,8 +208,8 @@ endfor
 print, n1,n2,n3
 
 ;*************************************************
-
-yy=49
+;stop
+yy=63
 
 gamma=1.66666667d0
 ggg=-274.0d0
@@ -287,34 +271,25 @@ d_z=0.2d0 ; width of Gaussian in Mm
 z_shift=0.d0 ; shift in Mm
 A=0.05d0 ; amplitude
 
-;d_z=0.5d0 ; width of Gaussian in Mm
-;z_shift=-0.1d0 ; shift in Mm
-;A=0.05d0 ; amplitude
+for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
+
+;for i=0,n1-1 do b0z[i]=par3((z[i]/scale-z_shift),d_z)
+
+;zc=0.2d0
+;for i=0,n1-1 do b0z[i]=1.d0-((atan((z[i]/max(z)-zc)*15.d0))+!Pi/2.d0)/!Pi
+
 
 wset,2
 !p.multi = [0,2,2,0,1]
-
-;********** configuration of B0z magnetic field
-
-;;;;;;;; numerical configuration
- 
- 
- 
- 
-for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
-
-
-
-;for i=0,n1-1 do b0z[i]=par5((z[i]/scale-z_shift),d_z)
-
 
 plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
 
 ;for i=n1-2,0,-1 do b0z[i]=b0z[i]+b0z[i+1]
 
-Bmax=0.15d0  ; mag field Tesla
+;Bmax=0.10d0  ; mag field Tesla
+Bmax=0.0250d0  ; mag field Tesla    ;case 2
 ;Bmin=0.0006d0  ; mag field Tesla
-Bmin=0.0002d0  ; mag field Tesla
+Bmin=0.00005d0  ; mag field Tesla
 
 
 bnmin=min(b0z)
@@ -325,69 +300,25 @@ b0z[i]=(Bmax-Bmin)/(bnmax-bnmin)*(b0z[i]-bnmin)+Bmin
 
 plot, z/scale, b0z, title='b0z_sum', charsize=1.2, xtitle='[Mm]'
 
-;tb0z=b0z
-
-;save, filename='z_b0z.sav', z,tb0z
-restore, 'z_b0z.sav' 
-tek_color
-oplot, z/scale, tb0z, color=3
-
-
-stop
-;;;;;;;; end of numerical configuration
-
-;;;;;;; from file
-restore, 'bax.sav' ;zax, BZZ
-;;;;;;; end from file
-
-zax=zax/100.d0 ; meter
-
-zax_n=dblarr(35)
-BZZ_n=dblarr(35)
-zax_n=zax(65:99)
-BZZ_n=BZZ(65:99)
-
-
-
-
-BZZ_n1=dblarr(n1)
-weights=1.d0/BZZ_n
-A = [100.0,-0.000001,1.0]
-yfit=curvefit(zax_n, BZZ_n, weights, A,SIGMA, FUNCTION_NAME='gfunct')
-
-BZZ_n1(*)=A[0]*exp(A[1]*x_code(*,1,1,0))+A[2]
-!P.multi=0
-plot, x_code(*,1,1,0)/1.e6, BZZ_n1
-tek_color
-oplot,zax_n/1.e6, BZZ_n, color=3
-
-BZZ_n1_min=327.d0
-
-;BZZ_n1=(BZZ_n1-BZZ_n1_min)/10000.d0
-
-BZZ_n1=BZZ_n1
-plot, x_code(*,1,1,0),BZZ_n1(*)
-
-;b0z=BZZ_n1
-;********** end of configuration of B0z magnetic field
-;tek_color
-;plot,z,b0z*10000.d0
-
-;oplot,zax_n,BZZ_n, color=red
-
-;save, filename='z_b0z.sav', z,b0z
 
 dbz=deriv1(b0z,z)
 
 xf=dblarr(n1,n2,n3)
 
+;xr=0.3d5
+;yr=0.3d5
 
-;xr=0.20d5
-;yr=0.20d5
 
 
-xr=0.10d6
-yr=0.10d6
+;xr=0.15d5
+;yr=0.15d5
+
+xr=0.015d5
+yr=0.015d5
+
+;xr=0.0075d5
+;yr=0.0075d5
+
 
 R2=(xr^2.d0+yr^2.d0)
 
@@ -397,7 +328,7 @@ for k=0,n3-1 do begin
 for j=0,n2-1 do begin
 for i=0,n1-1 do begin
 
-f=(x[j]^2.d0+y[k]^2.d0)/R2
+f=(x[j]^2.d0+y[k]^2.d0)*b0z(i)/R2
 
 xf[i,j,k]=exp(-f)
 
@@ -424,15 +355,13 @@ endfor
 
 dbz=deriv1(b0z,z)
 
-b0zz=0.0001d0
-
 for i=0,n1-1 do begin
 for k=0,n3-1 do begin 
 for j=0,n2-1 do begin
 
-bz(i,j,k)=b0zz*xf[i,j,k]
-bx(i,j,k)=0.d0
-by(i,j,k)=0.d0
+bz(i,j,k)=b0z[i]*xf[i,j,k]
+bx(i,j,k)=-x[j]*dbz[i]*xf[i,j,k]/2.d0
+by(i,j,k)=-y[k]*dbz[i]*xf[i,j,k]/2.d0
 
 endfor
 endfor
@@ -445,17 +374,17 @@ hh=49
 cs=1.6
 
 hight=strTrim(string(hh),1)
-tvframe, by(hh,*,*), title='by h='+hight, /bar,  CT='rho0',charsize=cs
-tvframe, bx(hh,*,*), title='bx h='+hight, /bar,  CT='rho0',charsize=cs
-tvframe, bz(*,*,yy), title='bz', /bar,  CT='rho0',charsize=cs
-tvframe, xf(*,*,yy), title='xf', /bar,  CT='rho0', $
+tvframe, by(hh,*,*), title='by h='+hight, /bar,charsize=cs ; CT='rho0',
+tvframe, bx(hh,*,*), title='bx h='+hight, /bar,  charsize=cs  ;CT='rho0',
+tvframe, bz(*,*,yy), title='bz', /bar,  charsize=cs  ;CT='rho0',
+tvframe, xf(*,*,yy), title='xf', /bar,   $
          xtitle='x [Mm]', ytitle='z [Mm]',charsize=cs, $ 
          xrange=[min(z)/scale, max(z)/scale], $
-	 yrange=[min(x)/scale, max(x)/scale]
-tvframe, by(*,yy,*), title='by', /bar,  CT='rho0',charsize=cs
-tvframe, bx(*,*,yy), title='bx', /bar,  CT='rho0',charsize=cs
+	 yrange=[min(x)/scale, max(x)/scale];CT='rho0',
+tvframe, by(*,yy,*), title='by', /bar, charsize=cs; CT='rho0',
+tvframe, bx(*,*,yy), title='bx', /bar, charsize=cs; CT='rho0',
 
-stop
+;stop
 
 bb=(bx^2.0+by^2.0+bz^2.0)/2.0/mu
 
@@ -681,7 +610,7 @@ endfor
 
 beta=(bx^2.d0+by^2.d0+bz^2.d0)/2.d0/p
 
-tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar, CT='VpVd'
+tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar ;, CT='VpVd'
 contour, beta(*,*,yy), LEVELS = [0.001,0.01,0.1,1.0, 10.0], $
          C_Annotation = ['1000.0','100.0','10.0','1.0','0.1'], /overplot,/follow
 	 
@@ -696,7 +625,7 @@ T=mu_gas*p/R/rho1
 tvframe,T(*,*,yy), charsize=1.2, title='T', /bar	 	 
 
 
-stop
+;stop
 
 ;lower boundary
 
@@ -758,7 +687,8 @@ tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
 ;qq=dbzdz+dbxdx
 ;goto, wwww
 close,1
-openw,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_bverttube_bin.ini',/f77_unf
+openw,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_btube4_bin.ini',/f77_unf
+;openw,1,'/data/ap1vf/3D_tube_196_100_100.ini',/f77_unf
 writeu,1,headline
 writeu,1,it,time,ndim,neqpar,nw
 writeu,1,nx
