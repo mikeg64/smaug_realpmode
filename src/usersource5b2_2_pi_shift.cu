@@ -85,7 +85,7 @@ yp=(p->xmin[1])+(((real)j)*(p->dx[1]));
 zp=(p->xmin[2])+(((real)k)*(p->dx[2]));
 
 exp_z=exp(-r1/(delta_z*delta_z));
-exp_xyz=sin(PI*yp*(n1+1)/xxmax)*sin(PI*zp*(n2+1)/yymax)*exp_z;
+exp_xyz=sin(PI+(PI*yp*(n1+1)/xxmax))*sin(PI+(PI*zp*(n2+1)/yymax))*exp_z;
 
 tdep=sin(qt*2.0*PI/s_period);
 vvz=AA*exp_xyz*tdep;

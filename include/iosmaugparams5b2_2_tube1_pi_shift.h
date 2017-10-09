@@ -25,7 +25,8 @@ real xmax=5955555.6e0;
 //real xmax=3.98638e6;
 
 //real xmin=39426.5;
-real xmin=133333.33;
+//real xmin=133333.33;
+real xmin=311111.0;
 real dx = (xmax-xmin)/(ni-2*ngi);
 //#endif
 
@@ -41,8 +42,11 @@ nj=nj+2*ngj;
 //real ymax = 6.2831853; 
 //real ymax = 4.0e6;
 //real ymin=1953.10;
-real ymax = 4.0e6;
-real ymin=1953.1;
+//real ymax = 4.0e6;
+//real ymin=1953.1;
+real ymax = 3.9844e6;
+real ymin=15625.0;
+
 
 real dy = (ymax-ymin)/(nj-2*ngj);    
 //nj=41;
@@ -58,8 +62,12 @@ nk=124;    //BW tests
 nk=nk+2*ngk;
 //real zmax=4.0e6;
 //real zmin=1953.1;
-real zmax = 4.0e6;
-real zmin=1953.1;
+//real zmax = 4.0e6;
+//real zmin=1953.1;
+
+real zmax = 3.9844e6;
+real zmin=15625.0;
+
 
 //real dx = xmax/(ni-4);
 real dz = (zmax-zmin)/(nk-2*ngk);
@@ -126,8 +134,8 @@ int finishsteering=0;
 //char *cfgfile="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_asc_84000.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
-//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert50G_asc.ini";
-char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_asc_177000.ini";
+//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert20G_asc.ini";
+char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_btube1_asc.ini";
 
 
 
@@ -136,7 +144,7 @@ char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_asc_177000.ini"
 //char *cfgfile="configs/pmode_256_256_128_4Mm_asc.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic256_5b2_2/zerospic1_asc_1953000.ini";
 
-//char *cfgfile="/fastdata/cs1mkg/smaug/spic5b2_2/zerospic1_asc_573000.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic5b2_2_tube1/zerospic1_asc_427000.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic5b0_3d/zerospic1_asc_402000.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic5b0_3d/zerospic1_asc_79000.ini";
 
@@ -160,7 +168,7 @@ char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_asc_177000.ini"
 //char *cfgout="/data/cs1mkg/smaug_spicule1/out/spicule5b4/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/spic5b2_2/zerospic1_";
-char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_";
+char *cfgout="/fastdata/cs1mkg/smaug/spic5b2_2_tube1_pish/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_";
 
@@ -208,8 +216,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-p->qt=177.0;
-p->it=177001;
+//p->qt=427.0;
+//p->it=427001;
 
 
 
