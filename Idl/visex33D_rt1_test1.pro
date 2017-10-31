@@ -111,8 +111,13 @@ close,2
 ;directory='/home/mikeg/proj/sac2.5d-cuda/out_OT_withhyper/'
 ;directory='../out/'
 ;directory='/fastdata/cs1mkg/smaug/spic5b2_2_tube1/'
+;directory='/fastdata/cs1mkg/smaug/spic5b2_2_tube1_pish/'
 ;directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/'
-directory='/fastdata/cs1mkg/smaug/spic_5b2_2/'
+;directory='/fastdata/cs1mkg/smaug/spic_5b2_2/'
+;directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/'
+;directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/'
+;directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G_hyp_p02/'
+directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G_hyp_p2/'
 
 
 ;pic=999
