@@ -126,9 +126,9 @@ int finishsteering=0;
 //char *cfgfile="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_asc_84000.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
-//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert100G_asc.ini";
+char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert200G_asc.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_60000.ini";
-char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_220000.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_176000.ini";
 
 
 
@@ -161,7 +161,7 @@ char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_220000.ini
 //char *cfgout="/data/cs1mkg/smaug_spicule1/out/spicule5b4/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/spic5b2_2/zerospic1_";
-char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_";
+char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_";
 
@@ -209,8 +209,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-p->qt=220.0;
-p->it=220001;
+//p->qt=176.0;
+//p->it=176001;
 
 
 
@@ -291,26 +291,15 @@ p->chyp[mom2]=0.4;
 p->chyp[mom3]=0.4;
 p->chyp[rho]=0.1;
 
-p->chyp[rho]=0.4;
-p->chyp[energy]=0.4;
-p->chyp[b1]=0.4;
-p->chyp[b2]=0.4;
-p->chyp[b3]=0.4;
-p->chyp[mom1]=0.6;
-p->chyp[mom2]=0.6;
-p->chyp[mom3]=0.6;
-p->chyp[rho]=0.4;
-
-p->chyp[rho]=0.7;
-p->chyp[energy]=0.7;
-p->chyp[b1]=0.7;
-p->chyp[b2]=0.7;
-p->chyp[b3]=0.7;
-p->chyp[mom1]=0.7;
-p->chyp[mom2]=0.7;
-p->chyp[mom3]=0.7;
-p->chyp[rho]=0.7;
-
+p->chyp[rho]=0.9;
+p->chyp[energy]=0.9;
+p->chyp[b1]=0.9;
+p->chyp[b2]=0.9;
+p->chyp[b3]=0.9;
+p->chyp[mom1]=0.9;
+p->chyp[mom2]=0.9;
+p->chyp[mom3]=0.9;
+p->chyp[rho]=0.9;
 
 
 #ifdef USE_MPI
