@@ -126,8 +126,8 @@ int finishsteering=0;
 //char *cfgfile="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_asc_84000.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
-char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert500G_asc.ini";
-//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_60000.ini";
+char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg500G_asc.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv500G/zerospic1_asc_7000.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_176000.ini";
 
 
@@ -169,8 +169,8 @@ char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv500G/zerospic1_";
 
 
 //dt=0.0018;  //OZT test
-//dt=0.001;
-dt=0.0005;
+dt=0.001;
+//dt=0.0005;
 
 
 //nt=3000;
@@ -209,8 +209,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-//p->qt=176.0;
-//p->it=176001;
+//p->qt=7.0;
+//p->it=7001;
 
 
 
@@ -249,6 +249,7 @@ p->divbfix=0.0;
 p->hyperdifmom=1.0;
 p->readini=1.0;
 p->cfgsavefrequency=1000;
+p->hffiltfrequency=2000;
 //p->cfgsavefrequency=100;
 
 p->xmax[0]=xmax+ngi*dx;
@@ -281,25 +282,38 @@ for(i=0;i<NVAR;i++)
 //p->chyp[mom3]=0.4;
 //p->chyp[rho]=0.02;
 
+//p->chyp[rho]=0.1;
+//p->chyp[energy]=0.1;
+//p->chyp[b1]=0.1;
+//p->chyp[b2]=0.1;
+//p->chyp[b3]=0.1;
+//p->chyp[mom1]=0.4;
+//p->chyp[mom2]=0.4;
+//p->chyp[mom3]=0.4;
+//p->chyp[rho]=0.1;
+
+
 p->chyp[rho]=0.1;
 p->chyp[energy]=0.1;
-p->chyp[b1]=0.1;
-p->chyp[b2]=0.1;
-p->chyp[b3]=0.1;
+p->chyp[b1]=0.7;
+p->chyp[b2]=0.7;
+p->chyp[b3]=0.7;
 p->chyp[mom1]=0.4;
 p->chyp[mom2]=0.4;
 p->chyp[mom3]=0.4;
 p->chyp[rho]=0.1;
 
-p->chyp[rho]=0.9;
-p->chyp[energy]=0.9;
-p->chyp[b1]=0.9;
-p->chyp[b2]=0.9;
-p->chyp[b3]=0.9;
-p->chyp[mom1]=0.9;
-p->chyp[mom2]=0.9;
-p->chyp[mom3]=0.9;
-p->chyp[rho]=0.9;
+
+
+//p->chyp[rho]=0.9;
+//p->chyp[energy]=0.9;
+//p->chyp[b1]=0.9;
+//p->chyp[b2]=0.9;
+//p->chyp[b3]=0.9;
+//p->chyp[mom1]=0.9;
+//p->chyp[mom2]=0.9;
+//p->chyp[mom3]=0.9;
+//p->chyp[rho]=0.9;
 
 
 #ifdef USE_MPI

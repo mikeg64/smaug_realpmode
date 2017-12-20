@@ -133,6 +133,8 @@ struct params {
         int divbon;
         int divbfix;
         int cfgsavefrequency;
+        int hffiltfrequency;
+
         int hyperdifmom; 
         int mode;
         int readini;

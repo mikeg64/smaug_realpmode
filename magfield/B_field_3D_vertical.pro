@@ -150,17 +150,17 @@ endif
 return,res
 end
 
-;;DEVICE, PSEUDO=8, DECOMPOSED=0, RETAIN=2
-;;WINDOW, /FREE, /PIXMAP, COLORS=256 & WDELETE, !D.WINDOW
+DEVICE, PSEUDO=8, DECOMPOSED=0, RETAIN=2
+WINDOW, /FREE, /PIXMAP, COLORS=256 & WDELETE, !D.WINDOW
 PRINT, 'Date:      ', systime(0)
 PRINT, 'n_colors   ', STRCOMPRESS(!D.N_COLORS,/REM)
 PRINT, 'table_size ', STRCOMPRESS(!D.TABLE_SIZE,/REM)
 
 
-;;window, 0,xsize=1025,ysize=300,XPOS = 700, YPOS = 900 
-;;window, 1,xsize=600,ysize=300,XPOS = 100, YPOS = 900 
-;;window, 2,xsize=600,ysize=600,XPOS = 50, YPOS = 500 
-;;window, 4,xsize=900,ysize=600,XPOS = 300, YPOS = 500 
+window, 0,xsize=1025,ysize=300,XPOS = 700, YPOS = 900 
+window, 1,xsize=600,ysize=300,XPOS = 100, YPOS = 900 
+window, 2,xsize=600,ysize=600,XPOS = 50, YPOS = 500 
+window, 4,xsize=900,ysize=600,XPOS = 300, YPOS = 500 
 ;***************
 headline='                                                                               '
 it=long(1)
@@ -173,7 +173,7 @@ dum=long(1)
 dumd=long(1)
 nn=0
 close,1
-openr,1,'../configs/3D_128_spic_bin.ini',/f77_unf
+openr,1,'/data/cs1mkg/smaug_pmode/configs/3D_128_spic_bin.ini',/f77_unf
 
 
 ;*****************************************************
@@ -219,12 +219,12 @@ y=reform(x_code(0,0,*,2))
 x=reform(x_code(0,*,0,1))
 z=reform(x_code(*,0,0,0))
 
-;;wset,0
+wset,0
 !p.multi = [0,3,0,0,1]
 
-;;plot,x, title='x', charsize=2.0
-;;plot,y, title='y', charsize=2.0
-;;plot,z, title='z', charsize=2.0
+plot,x, title='x', charsize=2.0
+plot,y, title='y', charsize=2.0
+plot,z, title='z', charsize=2.0
 
 scale=1.0d6
 
@@ -240,10 +240,10 @@ p[*,*,*]=p[*,*,*]-((w[*,*,*,5]+w[*,*,*,10])^2.0+(w[*,*,*,6]+w[*,*,*,11])^2.0 $
 p[*,*,*]=(gamma-1.d0)*p[*,*,*]
 
 
-;;wset,1
+wset,1
 !p.multi = [0,2,0,0,1]
 
-;;plot, z(*)/1.0d6,alog10(p(*,yy,yy)), title='alog(p_gas)', charsize=1.2, xtitle='[Mm]'
+plot, z(*)/1.0d6,alog10(p(*,yy,yy)), title='alog(p_gas)', charsize=1.2, xtitle='[Mm]'
 
 ;*************** end pressure ******************
 
@@ -256,7 +256,7 @@ bz=dblarr(n1,n2,n3)
 rho=reform(w(*,*,*,0)+w(*,*,*,9))
 rho1=dblarr(n1,n2,n3)
 
-;;plot, z(*)/1.0d6,alog10(rho(*,yy,yy)), title='log(rho)', charsize=1.2, xtitle='[Mm]'
+plot, z(*)/1.0d6,alog10(rho(*,yy,yy)), title='log(rho)', charsize=1.2, xtitle='[Mm]'
 
 
 b0z=dblarr(n1)
@@ -278,17 +278,49 @@ for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
 ;for i=0,n1-1 do b0z[i]=1.d0-((atan((z[i]/max(z)-zc)*15.d0))+!Pi/2.d0)/!Pi
 
 
-;;wset,2
-;;!p.multi = [0,2,2,0,1]
+wset,2
+!p.multi = [0,2,2,0,1]
 
-;;plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
+xf=dblarr(n1,n2,n3)
+
+
+;xr=0.20d5
+;yr=0.20d5
+
+
+xr=1.0d6
+yr=1.0d6
+
+R2=(xr^2.d0+yr^2.d0)
+
+A=R2/2.d0
+
+for k=0,n3-1 do begin 
+for j=0,n2-1 do begin
+for i=0,n1-1 do begin
+
+f=(x[j]^2.d0+y[k]^2.d0)/R2
+
+xf[i,j,k]=exp(-f)
+
+endfor
+endfor
+endfor
+
+
+
+
+
+
+
+plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
 
 ;for i=n1-2,0,-1 do b0z[i]=b0z[i]+b0z[i+1]
 
-Bmax=0.00200d0  ; mag field Tesla 200G
-;Bmax=0.00050d0  ; mag field Tesla 50G
-;Bmax=0.020d0  ; mag field Tesla 2000G
-;Bmax=0.00020d0  ; mag field Tesla 20G
+Bmax=0.001d0  ; mag field Tesla 100G
+;Bmax=0.005d0  ; mag field Tesla 500G
+;Bmax=0.002d0  ; mag field Tesla 200G
+
 ;Bmax=0.00010d0  ; mag field Tesla 10G
 ;Bmax=0.010d0  ; mag field Tesla
 ;Bmin=0.0006d0  ; mag field Tesla
@@ -324,7 +356,7 @@ for j=0,n2-1 do begin
 for k=0,n3-1 do begin
 
 p(i,j,k)=p(i,j,k)+w(i,j,k,8)*(gamma-1.d0)
-bz(i,j,k)=Bmax/sqrt(mu)
+bz(i,j,k)=Bmax*xf[i,j,k]/sqrt(mu)
 
 endfor
 endfor
@@ -333,19 +365,19 @@ endfor
 
 beta=(bx^2.d0+by^2.d0+bz^2.d0)/2.d0/p
 
-;;tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar;CT='VpVd'
-;;contour, beta(*,*,yy), LEVELS = [0.001,0.01,0.1,1.0, 10.0], $
-;;         C_Annotation = ['1000.0','100.0','10.0','1.0','0.1'], /overplot,/follow
+tvframe,beta(*,*,yy), charsize=1.2, title='1/beta', /bar;CT='VpVd'
+contour, beta(*,*,yy), LEVELS = [0.001,0.01,0.1,1.0, 10.0], $
+         C_Annotation = ['1000.0','100.0','10.0','1.0','0.1'], /overplot,/follow
 	 
-;;tvframe,rho1(*,*,yy), charsize=1.2, title='rho', /bar	 
-;;tvframe,p(*,*,yy), charsize=1.2, title='p', /bar	 	 
+tvframe,rho1(*,*,yy), charsize=1.2, title='rho', /bar	 
+tvframe,p(*,*,yy), charsize=1.2, title='p', /bar	 	 
 
 mu_gas=1.2d0
 R=8.3e+003
 
 T=mu_gas*p/R/rho1
 
-;;tvframe,T(*,*,yy), charsize=1.2, title='T', /bar	 	 
+tvframe,T(*,*,yy), charsize=1.2, title='T', /bar	 	 
 
 
 ;stop
@@ -384,23 +416,23 @@ w(*,*,*,8)=e
 ;w(*,*,*,11)=rotate(by,-1)
 ;w(*,*,*,12)=rotate(bx,-1)
 
-;w(*,*,*,10)=bz
-;w(*,*,*,11)=bx
-;w(*,*,*,12)=by
+w(*,*,*,10)=bz
+w(*,*,*,11)=bx
+w(*,*,*,12)=by
 
-w(*,*,*,5)=bz
-w(*,*,*,6)=bx
-w(*,*,*,7)=by
+;w(*,*,*,5)=bz
+;w(*,*,*,6)=bx
+;w(*,*,*,7)=by
 
 
 
-;;tvframe, w(*,*,yy,0)+w(*,*,yy,9), /bar, charsize=1.5, title='rho_t' 
+tvframe, w(*,*,yy,0)+w(*,*,yy,9), /bar, charsize=1.5, title='rho_t' 
 ;tvframe, w(*,*,yy,10), title='bz', /bar, charsize=1.5
 ;tvframe, w(*,*,yy,11), title='bx', /bar, charsize=1.5
 ;tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
-;;tvframe, w(*,*,yy,5), title='bz', /bar, charsize=1.5
-;;tvframe, w(*,*,yy,6), title='bx', /bar, charsize=1.5
-;;tvframe, w(*,yy,*,7), title='by', /bar, charsize=1.5
+tvframe, w(*,*,yy,5), title='bz', /bar, charsize=1.5
+tvframe, w(*,*,yy,6), title='bx', /bar, charsize=1.5
+tvframe, w(*,yy,*,7), title='by', /bar, charsize=1.5
 
 
 
@@ -419,7 +451,7 @@ w(*,*,*,7)=by
 ;qq=dbzdz+dbxdx
 ;goto, wwww
 close,1
-openw,1,'../configs/3D_128_spic_bvert200G_bin.ini',/f77_unf
+openw,1,'/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg100G_bin.ini',/f77_unf
 writeu,1,headline
 writeu,1,it,time,ndim,neqpar,nw
 writeu,1,nx

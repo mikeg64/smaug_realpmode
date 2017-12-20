@@ -128,7 +128,8 @@ int finishsteering=0;
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
 //char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert100G_asc.ini";
 //char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_60000.ini";
-char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_318000.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_318000.ini";
+char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg500G_asc.ini";
 
 
 
@@ -209,8 +210,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-p->qt=318.0;
-p->it=318001;
+//p->qt=318.0;
+//p->it=318001;
 
 
 
@@ -249,6 +250,7 @@ p->divbfix=0.0;
 p->hyperdifmom=1.0;
 p->readini=1.0;
 p->cfgsavefrequency=1000;
+p->hffiltfrequency=2000;
 //p->cfgsavefrequency=100;
 
 p->xmax[0]=xmax+ngi*dx;
@@ -291,26 +293,35 @@ p->chyp[mom2]=0.4;
 p->chyp[mom3]=0.4;
 p->chyp[rho]=0.1;
 
-p->chyp[rho]=0.4;
-p->chyp[energy]=0.4;
-p->chyp[b1]=0.4;
-p->chyp[b2]=0.4;
-p->chyp[b3]=0.4;
-p->chyp[mom1]=0.6;
-p->chyp[mom2]=0.6;
-p->chyp[mom3]=0.6;
-p->chyp[rho]=0.4;
+//p->chyp[rho]=0.4;
+//p->chyp[energy]=0.4;
+//p->chyp[b1]=0.4;
+//p->chyp[b2]=0.4;
+//p->chyp[b3]=0.4;
+//p->chyp[mom1]=0.6;
+//p->chyp[mom2]=0.6;
+//p->chyp[mom3]=0.6;
+//p->chyp[rho]=0.4;
 
-p->chyp[rho]=0.7;
-p->chyp[energy]=0.7;
-p->chyp[b1]=0.7;
-p->chyp[b2]=0.7;
-p->chyp[b3]=0.7;
-p->chyp[mom1]=0.7;
-p->chyp[mom2]=0.7;
-p->chyp[mom3]=0.7;
-p->chyp[rho]=0.7;
+//p->chyp[rho]=0.7;
+//p->chyp[energy]=0.7;
+//p->chyp[b1]=0.7;
+//p->chyp[b2]=0.7;
+//p->chyp[b3]=0.7;
+//p->chyp[mom1]=0.7;
+//p->chyp[mom2]=0.7;
+//p->chyp[mom3]=0.7;
+//p->chyp[rho]=0.7;
 
+p->chyp[rho]=0.1;
+p->chyp[energy]=0.1;
+p->chyp[b1]=0.6;
+p->chyp[b2]=0.6;
+p->chyp[b3]=0.6;
+p->chyp[mom1]=0.4;
+p->chyp[mom2]=0.4;
+p->chyp[mom3]=0.4;
+p->chyp[rho]=0.1;
 
 
 #ifdef USE_MPI

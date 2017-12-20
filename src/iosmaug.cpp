@@ -1139,6 +1139,15 @@ tc=second();
           tc=second();
           cusource(&p,&d_p,&d_state,&d_w,&d_wmod, &d_dwn1, &d_wd,order, ordero,p->dt);
                 tcal+=(second()-tc);
+
+          //HFFILTER TERM
+          if(((n-1)%(p->hffiltfrequency))==0)
+          {
+          	tc=second();
+          	cuhffilt(&p,&d_p,&d_state,&d_wmod,&d_wmod, &d_dwn1, &d_wd,order, ordero,p->dt);
+          	tcal+=(second()-tc);
+          }
+
 	for(int ii=0; ii<=(b1+(NDIM-1)); ii++)
 	for(int idir=0; idir<NDIM; idir++)
         //for(int ibound=0; ibound<2; ibound++)

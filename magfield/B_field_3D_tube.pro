@@ -174,8 +174,8 @@ dumd=long(1)
 nn=0
 close,1
 ;openr,1,'/data/ap1vf/3D_196_100_100.ini',/f77_unf
-openr,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_bin.ini',/f77_unf
-
+;openr,1,'/fastdata/cs1mkg/smaug/configs/3D_256_4Mm_bin.ini',/f77_unf
+openr,1,'/fastdata/cs1mkg/smaug/configs/3D_256_4Mm_bin.ini'
 ;*****************************************************
 
 readu,1,headline
@@ -195,6 +195,7 @@ n3=nx(2)
 
 x_code=dblarr(n1,n2,n3,ndim)
 w=dblarr(n1,n2,n3,nw)
+
 
 
 wi=dblarr(n1,n2,n3)
@@ -223,9 +224,9 @@ z=reform(x_code(*,0,0,0))
 wset,0
 !p.multi = [0,3,0,0,1]
 
-plot,x, title='x', charsize=2.0
-plot,y, title='y', charsize=2.0
-plot,z, title='z', charsize=2.0
+;plot,x, title='x', charsize=2.0
+;plot,y, title='y', charsize=2.0
+;plot,z, title='z', charsize=2.0
 
 scale=1.0d6
 
@@ -282,7 +283,7 @@ for i=0,n1-1 do b0z[i]=par4((z[i]/scale-z_shift),d_z)
 wset,2
 !p.multi = [0,2,2,0,1]
 
-plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
+;plot, z/scale, b0z, title='b0z', charsize=1.2, xtitle='[Mm]'
 
 ;for i=n1-2,0,-1 do b0z[i]=b0z[i]+b0z[i+1]
 
@@ -298,7 +299,7 @@ bnmax=max(b0z)
 for i=0,n1-1 do $
 b0z[i]=(Bmax-Bmin)/(bnmax-bnmin)*(b0z[i]-bnmin)+Bmin
 
-plot, z/scale, b0z, title='b0z_sum', charsize=1.2, xtitle='[Mm]'
+;plot, z/scale, b0z, title='b0z_sum', charsize=1.2, xtitle='[Mm]'
 
 
 dbz=deriv1(b0z,z)
@@ -687,7 +688,9 @@ tvframe, w(*,yy,*,12), title='by', /bar, charsize=1.5
 ;qq=dbzdz+dbxdx
 ;goto, wwww
 close,1
-openw,1,'/data/cs1mkg/smaug_spicule1/3D_128_spic_btube4_bin.ini',/f77_unf
+;openw,1,'/data/cs1mkg/smaug/configs/3D_256_4Mm_btube_bin.ini',/f77_unf
+openw,1,'/data/cs1mkg/smaug/configs/3D_256_4Mm_btube_bin.ini'
+
 ;openw,1,'/data/ap1vf/3D_tube_196_100_100.ini',/f77_unf
 writeu,1,headline
 writeu,1,it,time,ndim,neqpar,nw
