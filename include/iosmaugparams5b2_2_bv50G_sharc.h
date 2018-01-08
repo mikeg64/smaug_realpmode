@@ -127,7 +127,8 @@ int finishsteering=0;
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
 //char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert50G_asc.ini";
-char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_asc_284000.ini";
+char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/zerospic1_asc_571000.ini";
+//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg50G_asc.ini";
 
 
 
@@ -208,8 +209,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-p->qt=284.0;
-p->it=284001;
+p->qt=571.0;
+p->it=571001;
 
 
 
@@ -249,6 +250,7 @@ p->hyperdifmom=1.0;
 p->readini=1.0;
 p->cfgsavefrequency=1000;
 //p->cfgsavefrequency=100;
+p->hffiltfrequency=10000;
 
 p->xmax[0]=xmax+ngi*dx;
 p->xmax[1]=ymax+ngj*dy;

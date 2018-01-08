@@ -76,11 +76,11 @@ n1=2;
 n2=2;
 //AA=138.89;//*(n1+1)*(n2+1);
 //AA=10;//*(n1+1)*(n2+1);
-AA=500;//same energy delivered by all drivers
+AA=117;//same energy delivered by all drivers
 //AA=0;
 //AA=0.0356825*(n1+1)*(n2+1);
 //AA=2000;// ! 2 km/sec
-s_period=300.e0;
+s_period=30.e0;
 yp=(p->xmin[1])+(((real)j)*(p->dx[1]));
 zp=(p->xmin[2])+(((real)k)*(p->dx[2]));
 

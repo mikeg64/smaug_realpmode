@@ -1,0 +1,4 @@
+#!/bin/bash
+
+module load apps/matlab
+matlab -nosplash $1 -r "preview"

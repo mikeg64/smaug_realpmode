@@ -126,8 +126,8 @@ int finishsteering=0;
 //char *cfgfile="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_asc_84000.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
-//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert40G_asc.ini";
-char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv40G/zerospic1_asc_177000.ini";
+char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/3D_128_spic_asc.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/zerospic1_asc_630000.ini";
 
 
 
@@ -160,7 +160,7 @@ char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv40G/zerospic1_asc_177000.ini"
 //char *cfgout="/data/cs1mkg/smaug_spicule1/out/spicule5b4/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/spic5b2_2/zerospic1_";
-char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv40G/zerospic1_";
+char *cfgout="/fastdata/cs1mkg/smaug/spic_4b0t/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_";
 
@@ -172,7 +172,7 @@ dt=0.001;
 
 
 
-//nt=3000;
+nt=90000;
 //nt=5000;
 //nt=200000;
 //nt=150000;
@@ -208,8 +208,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-p->qt=177.0;
-p->it=177001;
+//p->qt=630.0;
+//p->it=630001;
 
 
 
@@ -223,10 +223,14 @@ p->gamma=1.66666667;  //OZ test
 //p->gamma=1.4;
 
 
-
+p->test=1;  //puts backgrounde terms in perturbed fields
 p->mu=1.0;
 p->eta=0.0;
-p->g[0]=-274.0;
+//p->g[0]=-274.0;
+p->g[0]=-256.997;
+//p->g[0]=0;
+
+
 //p->g[0]=0.0;
 p->g[1]=0.0;
 p->g[2]=0.0;
@@ -248,7 +252,7 @@ p->divbfix=0.0;
 p->hyperdifmom=1.0;
 p->readini=1.0;
 p->cfgsavefrequency=1000;
-//p->cfgsavefrequency=100;
+p->cfgsavefrequency=100;
 
 p->xmax[0]=xmax+ngi*dx;
 p->xmax[1]=ymax+ngj*dy;
@@ -280,7 +284,7 @@ p->chyp[mom2]=0.4;
 p->chyp[mom3]=0.4;
 p->chyp[rho]=0.02;
 
-p->chyp[rho]=0.7;
+/*p->chyp[rho]=0.7;
 p->chyp[energy]=0.7;
 p->chyp[b1]=0.7;
 p->chyp[b2]=0.7;
@@ -288,7 +292,7 @@ p->chyp[b3]=0.7;
 p->chyp[mom1]=0.7;
 p->chyp[mom2]=0.7;
 p->chyp[mom3]=0.7;
-p->chyp[rho]=0.7;
+p->chyp[rho]=0.7;*/
 
 
 

@@ -2,7 +2,7 @@
 ##sge for both
 #$ -j y
 #$ -l gpu=1
-#$ -N m5b2_2_bv50G
+#$ -N m4t_0
 #$ -l mem=12G
 
 
@@ -18,8 +18,6 @@
 #$ -l rmem=12G
 #$ -l h_rt=168:00:00
 
-
-
 #module for sharc
 #module load libs/CUDA/8.0.44/binary
 
@@ -28,15 +26,14 @@ module load libs/cuda/6.5.14
 
 
 
-
 cd include
-cp iosmaugparams5b2_2_bv50G_sharc.h iosmaugparams.h
+cp iosmaugparams4b0t_sharc.h iosmaugparams.h
 cd ..
 
 #cp smaug smaug_iceberg
 
 cd src
-cp usersource5b2_2.cu usersource.cu
+cp usersource4b0t.cu usersource.cu
 cp boundary_3d.cu boundary.cu
 make clean
 
@@ -45,6 +42,10 @@ make -f Makefile_3d smaug
 
 #make for Sharc
 #make -f Makefile_3d_k80 smaug
+
+
+
+
 
 
 cd ..

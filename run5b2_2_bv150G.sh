@@ -2,7 +2,7 @@
 ##sge for both
 #$ -j y
 #$ -l gpu=1
-#$ -N m5b2_2_bv50G
+#$ -N m5b2_2_bv150G
 #$ -l mem=12G
 
 
@@ -30,7 +30,7 @@ module load libs/cuda/6.5.14
 
 
 cd include
-cp iosmaugparams5b2_2_bv50G_sharc.h iosmaugparams.h
+cp iosmaugparams5b2_2_bv150G_sharc.h iosmaugparams.h
 cd ..
 
 #cp smaug smaug_iceberg
