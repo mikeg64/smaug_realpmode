@@ -1,4 +1,4 @@
 #!/bin/bash
 
-module load apps/matlab
-matlab -nosplash $1 -r "preview"
+module load apps/matlab/2014a
+matlab -nosplash -nodesktop $1 -r "previewgui"

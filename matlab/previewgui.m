@@ -22,7 +22,7 @@ function varargout = previewgui(varargin)
 
 % Edit the above text to modify the response to help previewgui
 
-% Last Modified by GUIDE v2.5 04-Jan-2018 07:51:35
+% Last Modified by GUIDE v2.5 11-Jan-2018 09:25:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,24 +58,25 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 handles.directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G/';
+%handles.directory=uigetdir();
 handles.extension='.out';
 handles.ndirectory=[handles.directory,'impreview/'];
 %ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G/impreview/';
 handles.nextension='.jpg';
 
 %figure;
-handles.pic=1;
+handles.pic=1000;
 handles.picstart=handles.pic;
 
 handles.sb1=2; %slice for base 1
 handles.svx1=108; % slice for vertical x
 handles.svy1=108; % slice for vertical y
 
-
+handles.rootfilename='zerospic1__'
     
-
-handles.id=int2str(1000*i);
-handles.filename=[handles.directory,'zerospic1__',handles.id,handles.extension];
+handles.id=int2str(handles.pic);
+%handles.id=int2str(1000*i);
+handles.filename=[handles.directory,'/',handles.rootfilename,handles.id,handles.extension];
 handles.timetext=['time=',int2str(i),'s'];
 handles.imfile=[handles.ndirectory,'im1_',handles.id,handles.nextension];
 handles.figfile=[handles.ndirectory,'fig1_',handles.id,'.fig'];
@@ -362,7 +363,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % axes(handles.axes1);
 % cla;
 
-popup_sel_index = get(handles.popupmenu1, 'Value');
+%popup_sel_index = get(handles.popupmenu1, 'Value');
 
 
    subplot(2,2,1)
@@ -598,3 +599,248 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 set(hObject, 'String', {'plot(rand(5))', 'plot(sin(1:0.01:25))', 'bar(1:.5:10)', 'plot(membrane)', 'surf(peaks)'});
+
+
+% --------------------------------------------------------------------
+function Open_1_Callback(hObject, eventdata, handles)
+% hObject    handle to Open_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+sdir=uigetdir();
+if exist(sdir,'dir')
+    handles.directory=sdir;
+else
+    handles.directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G';
+end
+guidata(hObject,handles); 
+
+% --- Executes on slider movement.
+function slider_sb1_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_sb1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+handles.sb1=get(hObject,'Value');
+  guidata(hObject,handles); 
+
+% --- Executes during object creation, after setting all properties.
+function slider_sb1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_sb1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function slider_svx1_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_svx1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+handles.svx1=get(hObject,'Value');
+  guidata(hObject,handles);
+  
+
+% --- Executes during object creation, after setting all properties.
+function slider_svx1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_svx1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function slider3_Callback(hObject, eventdata, handles)
+% hObject    handle to slider3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+  guidata(hObject,handles); 
+
+% --- Executes during object creation, after setting all properties.
+function slider3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function edit1_Callback(hObject, eventdata, handles)
+% hObject    handle to edit1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit1 as text
+%        str2double(get(hObject,'String')) returns contents of edit1 as a double
+handles.rootfilename=get(hObject,'String');
+ guidata(hObject,handles); 
+
+% --- Executes during object creation, after setting all properties.
+function edit1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editpic_Callback(hObject, eventdata, handles)
+% hObject    handle to editpic (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editpic as text
+%        str2double(get(hObject,'String')) returns contents of editpic as a double
+handles.pic=str2double(get(hObject,'String'));
+handles.id=str2double(get(hObject,'String'));
+  guidata(hObject,handles); 
+
+% --- Executes during object creation, after setting all properties.
+function editpic_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editpic (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function slidersvy1_Callback(hObject, eventdata, handles)
+% hObject    handle to slidersvy1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+handles.svy1=get(hObject,'Value');
+  guidata(hObject,handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function slidersvy1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slidersvy1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on button press in pushbutton_newpic.
+function pushbutton_newpic_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_newpic (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%handles.directory=uigetdir();
+handles.extension='.out';
+% handles.ndirectory=[handles.directory,'impreview/'];
+%ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G/impreview/';
+handles.nextension='.jpg';
+
+%figure;
+% handles.pic=1000;
+handles.picstart=handles.pic;
+
+% handles.sb1=2; %slice for base 1
+% handles.svx1=108; % slice for vertical x
+% handles.svy1=108; % slice for vertical y
+% 
+% handles.rootfilename='zerospic1__'
+    
+handles.id=int2str(handles.pic);
+%handles.id=int2str(1000*i);
+handles.filename=[handles.directory,'/',handles.rootfilename,handles.id,handles.extension];
+handles.timetext=['time=',int2str(handles.id),'s'];
+handles.imfile=[handles.ndirectory,'im1_',handles.id,handles.nextension];
+handles.figfile=[handles.ndirectory,'fig1_',handles.id,'.fig'];
+
+disp([handles.id handles.filename]);
+   fid=fopen(trim(handles.filename));
+   %fseek(fid,pictsize(ifile)*(npict(ifile)-1),'bof');
+   handles.headline=trim(setstr(fread(fid,79,'char')'));
+   it=fread(fid,1,'integer*4'); time=fread(fid,1,'float64');
+ 
+   ndim=fread(fid,1,'integer*4');
+   neqpar=fread(fid,1,'integer*4'); 
+   nw=fread(fid,1,'integer*4');
+   nx=fread(fid,3,'integer*4');
+   
+   nxs=nx(1)*nx(2)*nx(3);
+   varbuf=fread(fid,7,'float64');
+   
+   gamma=varbuf(1);
+   eta=varbuf(2);
+   g(1)=varbuf(3);
+   g(2)=varbuf(4);
+   g(3)=varbuf(5);
+   
+   
+   varnames=trim(setstr(fread(fid,79,'char')'));
+   
+   for idim=1:ndim
+      X(:,idim)=fread(fid,nxs,'float64');
+   end
+   
+   for iw=1:nw
+      %fread(fid,4);
+      w(:,iw)=fread(fid,nxs,'float64');
+      %fread(fid,4);
+   end
+   
+   nx1=nx(1);
+   nx2=nx(2);
+   nx3=nx(3);
+   
+   xx=reshape(X(:,1),nx1,nx2,nx3);
+   yy=reshape(X(:,2),nx1,nx2,nx3);
+   zz=reshape(X(:,3),nx1,nx2,nx3);
+   
+   
+ 
+  % extract variables from w into variables named after the strings in wnames
+handles.wd=zeros(nw,nx1,nx2,nx3);
+for iw=1:nw
+  
+     tmp=reshape(w(:,iw),nx1,nx2,nx3);
+     handles.wd(iw,:,:,:)=tmp;
+end
+
+
+%w=tmp(iw);
+  
+
+clear tmp; 
+   
+   
+   fclose(fid);
+ guidata(hObject,handles); 
