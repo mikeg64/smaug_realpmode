@@ -126,9 +126,10 @@ int finishsteering=0;
 //char *cfgfile="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_asc_84000.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_spic_asc.ini";
 //char *cfgfile="/shared/sp2rc2/Shared/configs/3D_128_4Mm_asc.ini";
-char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg200Gn_asc.ini";
-//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv200G/zerospic1_asc_467000.ini";
-//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_176000.ini";
+//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvert100G_asc.ini";
+//char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/zerospic1_asc_60000.ini";
+char *cfgfile="/fastdata/cs1mkg/smaug/spic_5b2_2_bv25G/zerospic1_asc_286000.ini";
+//char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg25G_asc.ini";
 
 
 
@@ -161,7 +162,7 @@ char *cfgfile="/data/cs1mkg/smaug_realpmode/configs/magvert/3D_128_spic_bvertbg2
 //char *cfgout="/data/cs1mkg/smaug_spicule1/out/spicule5b4/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/spic5b2_2/zerospic1_";
-char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv200Gn/zerospic1_";
+char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv25G/zerospic1_";
 //char *cfgout="/data/cs1mkg/smaug_spicule1/spicule5b0_3d/zerospic1_";
 //char *cfgout="/fastdata/cs1mkg/smaug/em6b4_bhor120/zerospic1_";
 
@@ -209,8 +210,8 @@ p->dx[2]=dz;
 p->qt=0.0;
 p->it=0;
 
-//p->qt=467.0;
-//p->it=467001;
+p->qt=286.0;
+p->it=286001;
 
 
 
@@ -249,9 +250,8 @@ p->divbfix=0.0;
 p->hyperdifmom=1.0;
 p->readini=1.0;
 p->cfgsavefrequency=1000;
-//p->cfgsavefrequency=100;
 p->hffiltfrequency=10000;
-
+//p->cfgsavefrequency=100;
 
 p->xmax[0]=xmax+ngi*dx;
 p->xmax[1]=ymax+ngj*dy;
@@ -285,6 +285,36 @@ for(i=0;i<NVAR;i++)
 
 p->chyp[rho]=0.1;
 p->chyp[energy]=0.1;
+p->chyp[b1]=0.1;
+p->chyp[b2]=0.1;
+p->chyp[b3]=0.1;
+p->chyp[mom1]=0.4;
+p->chyp[mom2]=0.4;
+p->chyp[mom3]=0.4;
+p->chyp[rho]=0.1;
+
+//p->chyp[rho]=0.4;
+//p->chyp[energy]=0.4;
+//p->chyp[b1]=0.4;
+//p->chyp[b2]=0.4;
+//p->chyp[b3]=0.4;
+//p->chyp[mom1]=0.6;
+//p->chyp[mom2]=0.6;
+//p->chyp[mom3]=0.6;
+//p->chyp[rho]=0.4;
+
+//p->chyp[rho]=0.7;
+//p->chyp[energy]=0.7;
+//p->chyp[b1]=0.7;
+//p->chyp[b2]=0.7;
+//p->chyp[b3]=0.7;
+//p->chyp[mom1]=0.7;
+//p->chyp[mom2]=0.7;
+//p->chyp[mom3]=0.7;
+//p->chyp[rho]=0.7;
+
+p->chyp[rho]=0.1;
+p->chyp[energy]=0.1;
 p->chyp[b1]=0.6;
 p->chyp[b2]=0.6;
 p->chyp[b3]=0.6;
@@ -292,16 +322,6 @@ p->chyp[mom1]=0.4;
 p->chyp[mom2]=0.4;
 p->chyp[mom3]=0.4;
 p->chyp[rho]=0.1;
-
-//p->chyp[rho]=0.9;
-//p->chyp[energy]=0.9;
-//p->chyp[b1]=0.9;
-//p->chyp[b2]=0.9;
-//p->chyp[b3]=0.9;
-//p->chyp[mom1]=0.9;
-//p->chyp[mom2]=0.9;
-//p->chyp[mom3]=0.9;
-//p->chyp[rho]=0.9;
 
 
 #ifdef USE_MPI
