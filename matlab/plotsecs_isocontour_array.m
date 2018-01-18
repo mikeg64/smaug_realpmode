@@ -13,7 +13,7 @@
 %directory='/fastdata/cs1mkg/smaug/washing_mach/';
 %directory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/';
 %directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
-directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
+directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/';
 
 
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
@@ -32,84 +32,69 @@ extension='.out';
 %ndirectory='/fastdata/cs1mkg/smaug/washing_mach/images_3d_vsecs_mag/';
 %ndirectory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/images_3d_vsecs_magc/';
 %ndirectory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/images_3d_vsecs_magc/';
-ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/images_3d_vsecs_magc/';
+ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
 
 %ndirectory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/images_3d_vsecs';
 nextension='.jpg';
 figure;
-for i=60:10:60
+
+
+ nxo=124;
+nyo=124;
+nzo=124;
+nrange1=3:126;
+nrange2=3:126;
+nrange3=3:126;
+nrange=3:126;
+
+
+
+
+
+
+
+for i=23:1:638
+
+figure('Visible','off','IntegerHandle','Off');
+  hold on;
+
 %for i=1519:2632
 %for i=2631:2632
     
-id=int2str(i);
-filename=[directory,'3D_spic_128_bv200g_',id,extension];
-
-%id=int2str(1000*i);
+%id=int2str(i);
 %filename=[directory,'zerospic1__',id,extension];
+
+id=int2str(1000*i);
+filename=[directory,'zerospic1__',id,extension];
 timetext=['time=',int2str(i),'s'];
 imfile=[ndirectory,'im1_',id,nextension];
 disp([id filename]);
    fid=fopen(trim(filename));
+
    %fseek(fid,pictsize(ifile)*(npict(ifile)-1),'bof');
-
-
    headline=trim(setstr(fread(fid,79,'char')'));
-
-   hr1=fread(fid, 1, 'int32') 
-   hr2=fread(fid, 1, 'int32') 
-
    it=fread(fid,1,'integer*4'); time=fread(fid,1,'float64');
  
-   hr3=fread(fid, 1, 'int32') 
-   %hr4=fread(fid, 1, 'int32')
-
-
    ndim=fread(fid,1,'integer*4');
    neqpar=fread(fid,1,'integer*4'); 
    nw=fread(fid,1,'integer*4');
-
-   hr6=fread(fid, 1, 'int32') 
-     hr5=fread(fid, 1, 'int32') 
-
    nx=fread(fid,3,'integer*4');
-%     hr5=fread(fid, 1, 'int32') 
    
    nxs=nx(1)*nx(2)*nx(3);
-hr5=fread(fid, 1, 'float64')
    varbuf=fread(fid,7,'float64');
-
-
- 
-
-
-
    
-   gamma=varbuf(1)
-   eta=varbuf(2)
-g0=varbuf(3)
-   g(1)=varbuf(4)
-   g(2)=varbuf(5)
-   g(3)=varbuf(6)
-nu=varbuf(7)
+   gamma=varbuf(1);
+   eta=varbuf(2);
+   g(1)=varbuf(3);
+   g(2)=varbuf(4);
+   g(3)=varbuf(5);
    
    
-   varnames=trim(setstr(fread(fid,79,'uchar')'));
-
-       nx1=128;%nx(1);
-    nx2=128;%nx(2);
-    nx3=128;%nx(3);
-   %nw=13;
-
-   nx1=nx(1);
-   nx2=nx(2);
-   nx3=nx(3);
+   varnames=trim(setstr(fread(fid,79,'char')'));
    
-   
-%    ndim=3;
    for idim=1:ndim
       X(:,idim)=fread(fid,nxs,'float64');
    end
-
    
    for iw=1:nw
       %fread(fid,4);
@@ -117,6 +102,9 @@ nu=varbuf(7)
       %fread(fid,4);
    end
    
+   nx1=nx(1);
+   nx2=nx(2);
+   nx3=nx(3);
    
    xx=reshape(X(:,1),nx1,nx2,nx3);
    yy=reshape(X(:,2),nx1,nx2,nx3);
@@ -133,9 +121,19 @@ for iw=1:nw
 end
 
 
-%w=tmp(iw);
-  
 
+
+
+
+
+
+
+
+
+
+
+
+   
 clear tmp; 
    
    
@@ -172,13 +170,13 @@ clear tmp;
    myval=shiftdim(val4,1);
    
      
-%    val3=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
-%    val2=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
-%    val1=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
+    val3=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
+    val2=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
+    val1=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
 
-    val3=reshape(wd(6,nrange,nrange,nrange),124,124,124); 
-    val2=reshape(wd(7,nrange,nrange,nrange),124,124,124); 
-    val1=reshape(wd(8,nrange,nrange,nrange),124,124,124);
+%    val3=reshape(wd(6,nrange,nrange,nrange),124,124,124); 
+%    val2=reshape(wd(7,nrange,nrange,nrange),124,124,124); 
+%    val1=reshape(wd(8,nrange,nrange,nrange),124,124,124);
 
 
     
@@ -197,25 +195,65 @@ mx1=shiftdim(x1,1);
 mx2=shiftdim(x2,1);
 mx3=shiftdim(x3,1);
 
-	R=8.3e+003;
+
+
+
+
+ 	R=8.3e+003;
 	mu=1.257E-6;
 	mu_gas=0.6;
 	gamma=1.66667;
+ 
+     %typedef enum vars {rho, mom1, mom2, mom3, energy, b1, b2, b3,energyb,rhob,b1b,b2b,b3b} CEV;
 
- % sabx=reshape(wd(11,nrange,nrange,nrange),124,124,124);
-%saby=reshape(wd(12,nrange,nrange,nrange),124,124,124);
-%sabz=reshape(wd(13,nrange,nrange,nrange),124,124,124);
-%TP=reshape(wd(9,nrange,nrange,nrange),124,124,124);
-%TP=TP-(sabx.^2.0+saby.^2.0+sabz.^2.0)./2.0;
+%compute temperature
+% val2=reshape(wd(1,nrange1,nrange2,nrange3)+wd(10,nrange1,nrange2,nrange3),nxo,nyo,nzo);
+
+%TP=reshape(wd(5,nrange,nrange,nrange)+wd(9,nrange,nrange,nrange),124,124,124);
+%TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+wd(4,nrange,nrange,nrange).^2)./(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange)),124,124,124);
+%TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 %TP=(gamma-1.d0).*TP;
+%TP=shiftdim(mu_gas.*TP./R./val2,1);
 
 
 
-   %mval is T
-  
-   %mytval=shiftdim(mu_gas.*TP./R./val2,1);  
-    
-    
+
+%compute temperature
+% val2=reshape(wd(1,nrange1,nrange2,nrange3)+wd(10,nrange1,nrange2,nrange3),nxo,nyo,nzo);
+
+
+
+
+
+TP=reshape(wd(5,nrange,nrange,nrange)+wd(9,nrange,nrange,nrange),124,124,124);
+TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+wd(4,nrange,nrange,nrange).^2)./(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange)),124,124,124);
+TP=(gamma-1.d0).*TP;
+TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+
+
+
+%TP=(gamma-1.d0).*TP;
+%TP=shiftdim(mu_gas.*TP./R./val2,1);
+
+mu=1.0;
+TP1=(1.0/gamma*mu)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
+TP1=sqrt(TP1);
+TP1=shiftdim(TP1,1);
+
+   maxv=max(max(max(TP1)));
+minv=min(min(min(TP1)));
+  %isovalue=0.1909;
+  isovalue=minv+(maxv-minv)/2;
+
+
+
+
+
+
+
+
+
+
 
 
    %P = [2 1 3];
@@ -224,7 +262,7 @@ mx3=shiftdim(x3,1);
    %x3 = permute(x3, P);
    %myval = permute(myval, P);
    
-   
+ %  myval=TP1;
   %h= slice(myval,64, 64, 4);
   %figure('Visible','off','IntegerHandle','Off');
   %hold on;
@@ -247,6 +285,7 @@ mx3=shiftdim(x3,1);
 %   
   colormap(jet(256));
 
+%mytval=TP1;
 if i>30
    % hcs=contourslice(mytval,[],[],[35 49 80]);
  % hcs=contourslice(mytval,[],[],[49 80]);
@@ -294,9 +333,31 @@ msz=shiftdim(sz,1);
  %h=streamline(stream3(mx1,mx2,mx3,mv1,mv2,mv3,msx,msy,msz));
  h=streamline(stream3(x1,x2,x3,mv1,mv2,mv3,sx,sy,sz));
  %h=streamline(stream3(x1,x2,x3,val1,val2,val3,sx,sy,sz));
- view(3);
- 
-  
+
+
+
+
+
+
+
+     isovalue1=1.0;
+     fv1 = patch(isosurface(x1,x2,x3,TP1,isovalue1));
+      isonormals(x1,x2,x3,TP1,fv1);
+     set(fv1,'FaceColor','green','EdgeColor','none','FaceAlpha',0.15);
+     
+%           isovalue2=1.8e6;
+%      fv2 = patch(isosurface(x1,x2,x3,TP,isovalue2));
+%       isonormals(x1,x2,x3,TP,fv2);
+%      set(fv2,'FaceColor','red','EdgeColor','none','FaceAlpha',0.3); 
+%      alpha(0.3);
+      daspect([1,1,1])
+%view(3); 
+%axis tight;
+%camlight; 
+%lighting gouraud ;
+
+
+
   
   
   
@@ -349,6 +410,9 @@ msz=shiftdim(sz,1);
      ;% maxval=100;
   end
   
+%maxval=2.0;
+%minval=0;
+
   cmap=colormap(jet(256));
   caxis([minval maxval]);
   %caxis([-0.6 0.6]);

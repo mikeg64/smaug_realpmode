@@ -12,7 +12,8 @@
 %directory='/home/mikeg/fuse/icefast/smaug/spic4p71a_1_1_3d/';
 %directory='/fastdata/cs1mkg/smaug/washing_mach/';
 %directory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/';
-directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
+%directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
+directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
 
 
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
@@ -30,24 +31,26 @@ extension='.out';
 %ndirectory='/home/mikeg/fuse/icefast/smaug/spic4p71a_1_1_3d/images_3d_vsecs/';
 %ndirectory='/fastdata/cs1mkg/smaug/washing_mach/images_3d_vsecs_mag/';
 %ndirectory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/images_3d_vsecs_magc/';
-ndirectory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/images_3d_vsecs_magc/';
+%ndirectory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/images_3d_vsecs_magc/';
+ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/images_3d_vsecs_magc/';
 
 %ndirectory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/images_3d_vsecs';
 nextension='.jpg';
 figure;
-for i=1:10:176
+for i=180:1:180
 %for i=1519:2632
 %for i=2631:2632
     
-id=int2str(i);
-filename=[directory,'3D_spic_128_bv200g_',id,extension];
-
-%id=int2str(1000*i);
+%id=int2str(i);
 %filename=[directory,'zerospic1__',id,extension];
+
+id=int2str(1000*i);
+filename=[directory,'zerospic1__',id,extension];
 timetext=['time=',int2str(i),'s'];
 imfile=[ndirectory,'im1_',id,nextension];
 disp([id filename]);
    fid=fopen(trim(filename));
+
    %fseek(fid,pictsize(ifile)*(npict(ifile)-1),'bof');
    headline=trim(setstr(fread(fid,79,'char')'));
    it=fread(fid,1,'integer*4'); time=fread(fid,1,'float64');
@@ -98,9 +101,19 @@ for iw=1:nw
 end
 
 
-%w=tmp(iw);
-  
 
+
+
+
+
+
+
+
+
+
+
+
+   
 clear tmp; 
    
    
@@ -137,13 +150,13 @@ clear tmp;
    myval=shiftdim(val4,1);
    
      
-%    val3=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
-%    val2=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
-%    val1=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
+    val3=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
+    val2=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
+    val1=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
 
-    val3=reshape(wd(6,nrange,nrange,nrange),124,124,124); 
-    val2=reshape(wd(7,nrange,nrange,nrange),124,124,124); 
-    val1=reshape(wd(8,nrange,nrange,nrange),124,124,124);
+%    val3=reshape(wd(6,nrange,nrange,nrange),124,124,124); 
+%    val2=reshape(wd(7,nrange,nrange,nrange),124,124,124); 
+%    val1=reshape(wd(8,nrange,nrange,nrange),124,124,124);
 
 
     

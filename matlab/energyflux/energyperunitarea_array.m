@@ -234,6 +234,7 @@ clear tmp;
    %val1=reshape(wd(2,nrange,nrange,nrange),124,124,124);
    %val2=reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124);
 
+     %typedef enum vars {rho, mom1, mom2, mom3, energy, b1, b2, b3,energyb,rhob,b1b,b2b,b3b} CEV;
 
    %myval=shiftdim(val1./val2,1);
    val1=reshape(wd(5,nrange,nrange,nrange),124,124,124)+reshape(wd(9,nrange,nrange,nrange),124,124,124); %energy
