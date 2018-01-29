@@ -153,55 +153,6 @@ int addgrav_cd2(real *dw, real *wd, real *w, real *wmod, struct params *p,int *i
   return ( status);
 }
 
-__device__ __host__
-int hffilt_cd2(real *dw, real *wd, real *w, real *wmod, struct params *p,int *ii) {
-
-  //int direction;
-  int status=0;
-  int field,dir;
-  //real divflux=0;
-  //dw[fencode3_cd2(p,ii,field)]= grad_cd2(wd,p,ii,flux,dir);//+grad_cd2(wd,p,ii,f2,1);
- 
-  int iis[NDIM];
-
-  for(dir=0; dir<NDIM; dir++)iis[dir]=ii[dir];
-
-  for(field=rho;field<=b3;field++)
-  {
-      for(dir=0; dir<NDIM; dir++)
-      {
-          iis[dir]=ii[dir]-3;
-          wmod[fencode3_cd2(p,ii,field)]+=w[fencode3_cd2(p,iis,field)]/64;
-
-          iis[dir]=ii[dir]-2;
-          wmod[fencode3_cd2(p,ii,field)]-=3*w[fencode3_cd2(p,iis,field)]/32;
-
-          iis[dir]=ii[dir]-1;
-          wmod[fencode3_cd2(p,ii,field)]+=15*w[fencode3_cd2(p,iis,field)]/64;
-
-          iis[dir]=ii[dir];
-          wmod[fencode3_cd2(p,ii,field)]-=5*w[fencode3_cd2(p,iis,field)]/16;
-
-          iis[dir]=ii[dir]+1;
-          wmod[fencode3_cd2(p,ii,field)]+=15*w[fencode3_cd2(p,iis,field)]/64;
-
-          iis[dir]=ii[dir]+2;
-          wmod[fencode3_cd2(p,ii,field)]-=3*w[fencode3_cd2(p,iis,field)]/32;
-
-          iis[dir]=ii[dir]+3;
-          wmod[fencode3_cd2(p,ii,field)]+=w[fencode3_cd2(p,iis,field)]/64;
-
-      }
-
-  }
-  
- 
-
-
-  return ( status);
-}
-
-
 
 __device__ __host__
 real transportflux_cd2 (real *dw, real *wd, real *w, struct params *p,int *ii,int field, int direction) {
@@ -820,7 +771,7 @@ __global__ void grav_parallel(struct params *p, struct state *s, real *w, real *
      #else
        if(ii[0]<(p->n[0])-2 && ii[1]<(p->n[1])-2)
      #endif
-                                addgrav_cd2(dwn1,wd,w,wmod+ordero*NVAR*dimp,p,ii);
+                                addgrav_cd2(dwn1,wd,wmod+order*NVAR*dimp,wmod+ordero*NVAR*dimp,p,ii);
 
 
 
@@ -914,78 +865,6 @@ __syncthreads();
 
                          
 }
-
-
-__global__ void hffilt_parallel(struct params *p, struct state *s, real *w, real *wmod, 
-    real *dwn1, real *wd, int order, int ordero, real dt,int f,int dir)
-{
- 
-  int iindex = blockIdx.x * blockDim.x + threadIdx.x;
-  int i,j,fid;
-  int ni=p->n[0];
-  int nj=p->n[1];
-  int ii[NDIM];
-  int dimp=((p->n[0]))*((p->n[1]));
- #ifdef USE_SAC_3D
-   int nk=p->n[2];
-   int kp;
-   real dz=p->dx[2];
-   dimp=((p->n[0]))*((p->n[1]))*((p->n[2]));
-#endif  
-   int ip,jp;
-
-  #ifdef USE_SAC_3D
-   kp=iindex/(nj*ni);
-   jp=(iindex-(kp*(nj*ni)))/ni;
-   ip=iindex-(kp*nj*ni)-(jp*ni);
-#else
-    jp=iindex/ni;
-   ip=iindex-(jp*ni);
-#endif     
-
-
-   fid=0;
-
-   //compute pbg used in next source term
-
-
-     ii[0]=ip;
-     ii[1]=jp;
-     #ifdef USE_SAC_3D
-	   ii[2]=kp;
-     #endif
-
-
-
-
-
-
-
-     ii[0]=ip;
-     ii[1]=jp;
-     #ifdef USE_SAC_3D
-	   ii[2]=kp;
-     #endif
-
-
-     #ifdef USE_SAC_3D
-       if(ii[0]<((p->n[0])-3) && ii[1]<((p->n[1])-3) && ii[2]<((p->n[2])-3)     && ii[0]>2    &&  ii[1]>2   && ii[2]>2   )
-     #else
-       if(ii[0]<(p->n[0])-3 && ii[1]<(p->n[1])-3)
-     #endif
-                                hffilt_cd2(dwn1,wd,w,wmod+ordero*NVAR*dimp,p,ii);
-
-
-
-__syncthreads();
-
-
-
-                         
-}
-
-
-
 
 
 __global__ void centdiff2d_parallel(struct params *p, struct state *s, real *w, real *wmod, 
@@ -1321,50 +1200,6 @@ int cugrav(struct params **p, struct params **d_p, struct state **d_s, real **d_
      //checkErrors("copy data from device");
 
 }
-
-
-
-int cuhffilt(struct params **p, struct params **d_p, struct state **d_s, real **d_w,  real **d_wmod, real **d_dwn1, real **d_wd, int order,int ordero, real dt)
-{
- int dimp=(((*p)->n[0]))*(((*p)->n[1]));
-
-  int field=rho;
-  int dir=0;   
- #ifdef USE_SAC_3D
-   
-  dimp=(((*p)->n[0]))*(((*p)->n[1]))*(((*p)->n[2]));
-#endif 
-
-   int numBlocks = (dimp+numThreadsPerBlock-1) / numThreadsPerBlock;
-  
-    cudaMemcpy(*d_p, *p, sizeof(struct params), cudaMemcpyHostToDevice);
-printf("filter \n");
-
-     hffilt_parallel<<<numBlocks, numThreadsPerBlock>>>(*d_p,*d_s, *d_w, *d_wmod, *d_dwn1,  *d_wd, order,ordero,dt,field,dir);
-     cudaThreadSynchronize();
-
-
-    //cudaMemcpy(*p, *d_p, sizeof(struct params), cudaMemcpyDeviceToHost);
-    //printf("source params %G %f %f %G\n",(*p)->test, (*p)->chyp[0] , (*p)->chyp[1] , (*p)->chyp[2]);
-
-
-
-     //centdiff2d_parallel<<<numBlocks, numThreadsPerBlock>>>(*d_p,*d_s, *d_w, *d_wmod, *d_dwn1,  *d_wd, order,ordero,dt,field,dir);
-     //cudaThreadSynchronize();
-
-
-     // cudaMemcpy(*w, *d_w, NVAR*((*p)->n[0])* ((*p)->n[1])*sizeof(real), cudaMemcpyDeviceToHost);
-     //cudaMemcpy(*wnew, *d_wnew, NVAR*((*p)->n[0])* ((*p)->n[1])*sizeof(real), cudaMemcpyDeviceToHost);
-     //cudaMemcpy(*b, *d_b, (((*p)->n[0])* ((*p)->n[1]))*sizeof(real), cudaMemcpyDeviceToHost);
-
-     //checkErrors("copy data from device");
-
-}
-
-
-
-
-
 
 int cusource(struct params **p, struct params **d_p, struct state **d_s, real **d_w,  real **d_wmod, real **d_dwn1, real **d_wd, int order,int ordero, real dt)
 {
