@@ -169,7 +169,7 @@ char *cfgout="/fastdata/cs1mkg/smaug/spic_5b2_2_bv200Gn/zerospic1_";
 
 
 //dt=0.0018;  //OZT test
-dt=0.001;
+dt=0.0001;
 
 
 
@@ -243,12 +243,12 @@ p->cmax=0.02;
 p->rkon=0.0;
 p->sodifon=1.0;
 p->courant=0.1;
-p->moddton=0.0;
+p->moddton=1.0;
 p->divbon=0.0;
 p->divbfix=0.0;
 p->hyperdifmom=1.0;
 p->readini=1.0;
-p->cfgsavefrequency=1000;
+p->cfgsavefrequency=100;
 //p->cfgsavefrequency=100;
 p->hffiltfrequency=10000;
 

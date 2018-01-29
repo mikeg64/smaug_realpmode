@@ -762,7 +762,7 @@ gpusync();
 	int order1;
 	int orderb=0;
 	int ii,ii0,ii1;
-	real dtdiffvisc;
+	real dtdiffvisc,dtgrav,dttemp,ga;
 	ttot=0;
 	real time=0.0;
 	state->it=0;
@@ -843,15 +843,28 @@ gpusync();
        /*********************************************************************************************************/
 	   if(p->moddton==1.0)
 	   {
+
+
                 tc=second();
 		p->maxcourant=0.0;
-		courantmax=0.0;
+                dtgrav=BIGDOUBLE;
+		courantmax=SMALLDOUBLE;
+              dt=0.005;
+              p->dt=0.005;
 		for(int dim=0; dim<=(NDIM-1); dim++)
 		{
 			cucomputec(&p,&d_p,&d_wmod, &d_wd,order,dim);
 			cucomputemaxc(&p,&d_p,&d_wmod, &d_wd,order,dim,&wd,&d_wtemp);
-			cucomputemaxcourant(&p,&d_p,&d_wmod, &d_wd,order,dim,&wd,&d_wtemp);  //potential bottleneck here
+			//cucomputemaxcourant(&p,&d_p,&d_wmod, &d_wd,order,dim,&wd,&d_wtemp);  //potential bottleneck here
 		}
+
+		for(int dim=0; dim<=(NDIM-1); dim++)
+		{			
+                           dttemp=(p->cmax/(p->dx[dim]));
+                           if(dttemp>courantmax ) courantmax=dttemp;
+                }
+               p->maxcourant=courantmax;
+
 
 		#ifdef USE_MPI
                    tv=second();
@@ -860,13 +873,31 @@ gpusync();
                    tcom+=(second()-tv);
 		#endif
 	
-		if(     ((  (p->courant)/(p->maxcourant)  ))>1.0e-8  )
-		       p->dt=(p->courant)/(p->maxcourant);
-		//printf("new dt is %g %g\n",(p->courant)/(p->maxcourant),p->dt);
+		if(     (dttemp=(  (p->courant)/(p->maxcourant)  ))>SMALLDOUBLE  && dttemp<dt  )
+		       p->dt=dttemp;
+		printf("new dt is %g %g %g\n",(p->courant)/(p->maxcourant),p->dt,(p->maxcourant));
 
-		if(n>1)
-		   cugetdtvisc1(&p,&d_p,&d_wmod, &wd,&d_wd,order,&d_wtemp,&d_wtemp1,&d_wtemp2);
+		//if(n>1)
+		//   cugetdtvisc1(&p,&d_p,&d_wmod, &wd,&d_wd,order,&d_wtemp,&d_wtemp1,&d_wtemp2);
+
+
+		//include hyperdiffusion contribution
+                if(n>(its+1))
+                {
+                dtdiffvisc=BIGDOUBLE;
+		for(int dim=0; dim<=(NDIM-1); dim++)
+		{			
+                           dttemp=0.25/(p->maxviscoef/((p->dx[dim])*(p->dx[dim])));
+                           if(dttemp<dtdiffvisc && dttemp>SMALLDOUBLE) dtdiffvisc=dttemp;
+                }
+
+                if(dtdiffvisc<(p->dt) && dtdiffvisc>SMALLDOUBLE) p->dt=dtdiffvisc;
+                }
+
+
                 tcal+=(second()-tc);
+               printf(" dtdiffvisc %20.10g %20.10g  %20.10g\n",dttemp,p->maxviscoef,p->dtdiffvisc);
+
                 //printf("ipe %d dtdiffvisc %20.10g  %20.10g\n",p->ipe,p->maxviscoef,p->dtdiffvisc);
 		#ifdef USE_MPI
                    tv=second();
@@ -876,14 +907,29 @@ gpusync();
 		#endif
 
 		
-		if((p->dtdiffvisc)>1.0e-8 && (p->dt)>((p->dtdiffvisc)) )
-			                      			p->dt=(p->dtdiffvisc);
+		//if((p->dtdiffvisc)>SMALLDOUBLE && (p->dt)>((p->dtdiffvisc)) )
+		//	                      			p->dt=(p->dtdiffvisc);
 		#ifdef USE_MPI
 			printf(" on pe %d modified dt is %20.10g \n",p->ipe,p->dt);
 		#else
-			printf("modified dt is %20.10g \n",p->dt);
+			printf("modified dt is %20.10g  %20.10g\n",p->dt,p->dtdiffvisc);
 		#endif
 		//include gravitational modification
+		/*for(int dim=0; dim<=(NDIM-1); dim++)
+		{			
+			if((ga=abs(p->g[dim])) > 0)
+                        {
+                           dttemp=1.0/sqrt(ga/(p->dx[dim]));
+                           if(dttemp<dtgrav && dttemp>SMALLDOUBLE) dtgrav=dttemp;
+                         }
+                }
+
+                if(dtgrav<(p->dt) && dtgrav>SMALLDOUBLE) p->dt=dtgrav;*/
+                p->maxviscoef=SMALLDOUBLE;
+
+
+
+
 	   } 
        /*********************************************************************************************************/
        /* End of single step  iteration*/
