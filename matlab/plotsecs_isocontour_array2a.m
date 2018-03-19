@@ -14,7 +14,7 @@
 %directory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/';
 %directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
 %directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/';
-directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv25G/';
+directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
 
 
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
@@ -56,11 +56,11 @@ nrange=3:126;
 
 %for i=[76 151 ]
 
-for i=[75 76 151 225 226 330]
+%for i=[75 76 151 225 226 330]
 
-%for i=1:1:638
+for i=1:1:501
 
-%figure('Visible','off','IntegerHandle','Off');
+figure('Visible','off','IntegerHandle','Off');
   hold on;
 
 %for i=1519:2632
@@ -72,7 +72,7 @@ for i=[75 76 151 225 226 330]
 id=int2str(1000*i);
 filename=[directory,'zerospic1__',id,extension];
 timetext=['time=',int2str(i),'s'];
-imfile=[ndirectory,'im1noiso_',id,nextension];
+imfile=[ndirectory,'im1_',id,nextension];
 disp([id filename]);
    fid=fopen(trim(filename));
 
@@ -145,6 +145,13 @@ clear tmp;
    fclose(fid);
 
 
+   wd(6,:,:,:)=sqrt(mu)*1.0e4*wd(6,:,:,:);
+   wd(7,:,:,:)=sqrt(mu)*1.0e4*wd(7,:,:,:);
+   wd(8,:,:,:)=sqrt(mu)*1.0e4*wd(8,:,:,:);
+
+   wd(11,:,:,:)=sqrt(mu)*1.0e4*wd(11,:,:,:);
+   wd(12,:,:,:)=sqrt(mu)*1.0e4*wd(12,:,:,:);
+   wd(13,:,:,:)=sqrt(mu)*1.0e4*wd(13,:,:,:);
 
 
 %plot sections through 3d array
@@ -241,7 +248,7 @@ TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,
 %TP=shiftdim(mu_gas.*TP./R./val2,1);
 
 %mu=1.0;
-TP1=mu*1.0e8*(1.0/gamma)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
+TP1=(1.0/gamma*mu)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
 TP1=sqrt(TP1);
 TP1=shiftdim(TP1,1);
 

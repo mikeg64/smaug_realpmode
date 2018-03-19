@@ -1,6 +1,6 @@
 
 %ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
-ndirectory=[directory,'im_2d_ef/'];
+ndirectory=[directory,'imp_2d_ef/'];
 imfile=[ndirectory,'im1t_',id,nextension];
 
 figure('Visible','off','IntegerHandle','Off');
@@ -133,7 +133,7 @@ minv=min(min(min(TP1)));
 %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 50 100],'ShowText','on');
   %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 10 20],'ShowText','on');
- [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 4 6 8],'ShowText','on');
+ [C,hcs1]=contour((reshape(mytval(:,:,49),[124 124]))',[1 4 6 8],'ShowText','on');
  
 clabel(C,hcs1)
 set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
@@ -147,13 +147,13 @@ set(findobj(gca,'Type','patch','UserData',6),'EdgeColor',[0 1 0])
 %end
  
  hold on 
-  sect=eflux( 65,:,:);
+  sect=eflux( :,:,49);
 h=surf((reshape(sect,[124 124]))','LineStyle','none');
   view(0,90);
 % view(-37.5,15);
   
   
- hcs=contour((reshape(TP1(65,:,:),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
+ hcs=contour((reshape(TP1(:,:,49),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
 
  
 
@@ -224,8 +224,8 @@ minval=min(min(sect));
 %minval=0;
 
 
-maxval=0.0001;
-minval=-0.0001;
+maxval=0.00002;
+minval=-0.00002;
 
 
   cmap=colormap(jet(256));

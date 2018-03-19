@@ -1,6 +1,5 @@
-
 %ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
-ndirectory=[directory,'im_2d_vperp/'];
+ndirectory=[directory,'imp_2d_vlong/'];
 imfile=[ndirectory,'im1t_',id,nextension];
 
 figure('Visible','off','IntegerHandle','Off');
@@ -24,15 +23,15 @@ hold on;
    ay=y(nrange);
    az=z(nrange);
    [x1,x2,x3] = meshgrid(ax,ay,az);
-   val1=reshape(wd(3,nrange,nrange,nrange),124,124,124);
+   val1=reshape(wd(2,nrange,nrange,nrange),124,124,124);
    val3=reshape(wd(4,nrange,nrange,nrange),124,124,124);
    val2=reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124);
 
 
-   val1=(val1./val2);
+   val4=(val1./val2);
    val3=(val3./val2);
 
-   val4=sqrt(val1.^2 + val3.^2);
+   %val4=sqrt(val1.^2 + val3.^2);
 
    myval=shiftdim(val4,1);
    
@@ -146,10 +145,10 @@ minv=min(min(min(TP1)));
  % h=slice(myval,96, 96,[5 49 ]);  %used for 0,1 mode
 
   %h=slice(myval,105, 96,8);
-  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
-  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 10 20],'ShowText','on');
- [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 4 6 8],'ShowText','on');
-
+   %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
+  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 50 100],'ShowText','on');
+ %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 10 20],'ShowText','on');
+ [C,hcs1]=contour((reshape(mytval(:,:,49),[124 124]))',[1 4 6 8],'ShowText','on');
 clabel(C,hcs1)
 set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
 set(findobj(gca,'Type','patch','UserData',2),'EdgeColor',[0 1 0])
@@ -162,13 +161,13 @@ set(findobj(gca,'Type','patch','UserData',6),'EdgeColor',[0 1 0])
 %end
  
  hold on 
-  sect=myval( 65,:,:);
+  sect=myval( :,:,49);
 h=surf((reshape(sect,[124 124]))','LineStyle','none');
   view(0,90);
 % view(-37.5,15);
   
   
- hcs=contour((reshape(TP1(65,:,:),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
+ hcs=contour((reshape(TP1(:,:,49),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
 
  
 
@@ -287,12 +286,11 @@ h=surf((reshape(sect,[124 124]))','LineStyle','none');
  % maxval=50;
  % minval=-50;
 
-
-
-
-
+;disp('vlong');
 maxval=max(max(sect));
 minval=min(min(sect));
+
+
 
 
   
@@ -312,8 +310,8 @@ minval=min(min(sect));
      ;% maxval=100;
   end
   
-maxval=0.22;
-minval=0;
+maxval=5.0;
+minval=-5;
 
   cmap=colormap(jet(256));
   caxis([minval maxval]);
@@ -339,7 +337,7 @@ hold on;
   xlabel('y-distance (Mm)');
   ylabel('Height (Mm)');
   
-  ylabel(hc,'Transverse Velocity [m/s]');
+  ylabel(hc,'Vz [m/s]');
   
   set(gca,'Xdir','reverse')
   

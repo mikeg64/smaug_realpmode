@@ -14,6 +14,8 @@
 directory='/fastdata/cs1mkg/smaug/spic_5b2_2/';
 %directory='/fastdata/cs1mkg/smaug/washmc_2p5_2p5_12p5_180_kg/';
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
+directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2/';
+
 extension='.out';
 
 %ndirectory='/storage2/mikeg/results/spic5b0_b1G_3d/images_3d_vsecs/';
@@ -27,7 +29,8 @@ extension='.out';
 %ndirectory='/fastdata/cs1mkg/smaug/spic1p00a_0_3_3d/images_3d_vsecs/';
 %ndirectory='/home/mikeg/fuse/icefast/smaug/spic4p71a_1_1_3d/images_3d_vsecs/';
 %ndirectory='/fastdata/cs1mkg/smaug/spic_4b2_2_bv20G/images_3d_vsecs/';
-ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2/images_3d_vsecs/';
+%ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2/images_3d_vsecs/';
+ndirectory=[directory,'images_3d_vsecs/']
 
 %ndirectory='/fastdata/cs1mkg/smaug/washing_mach/images_vzslices/';
 %ndirectory='/fastdata/cs1mkg/smaug/washmc_2p5_2p5_12p5_180_kg/images_vzslices/';
@@ -35,7 +38,9 @@ ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2/images_3d_vsecs/';
 %ndirectory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/images_3d_vsecs/';
 nextension='.jpg';
 figure;
-for i=1:1:623
+%for i=[75 76 151 225 226 330]
+
+for i=1:1:617
 %for i=1519:2632
 %for i=2631:2632
     
@@ -256,6 +261,10 @@ clear tmp;
   %set(gca,'XTickLabel',{'0';'1.6';'3.2'})
   %set(gca,'YTickLabel',{'0';'1.6';'3.2'})
 
+  set(gca,'XTickLabel',{'0';'1.6';'3.2';'4.8'})
+  set(gca,'YTickLabel',{'0';'1.6';'3.2';'4.8'})
+  %set(gca,'YTickLabel',{'0';'0.63';'1.26';'1.89';'2.52';'3.15';'3.78','4.8'})
+  set(gca,'ZTickLabel',{'0.09';'0.99';'1.94';'2.88';'3.83';'4.77';'5.72';'6.67'})
 
 
   %set(gca,'YTickLabel',{'0';'1.6';'3.2'})
@@ -297,8 +306,8 @@ clear tmp;
        end
  
   
-%     minval=-400;
-%     maxval=400;
+     minval=-4;
+     maxval=4;
   cmap=colormap(jet(256));
   caxis([minval maxval]);
   %caxis([-0.6 0.6]);

@@ -1,9 +1,9 @@
-
+%directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
 
 %directory='/storage2/mikeg/results/spic2p3a_0_3_3d/';
-bdir='/fastdata/cs1mkg/smaug/';
-rdirectory='spic_5b2_2_bv20G';
-nt=618;
+bdir='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/';
+rdirectory='spic_5b2_2_bv50G';
+nt=928;
 
 
 %directory='/fastdata/cs1mkg/smaug/spic5b0_2_3d_rep/';
@@ -15,7 +15,7 @@ extension='.out';
 ndirectory=[bdir,rdirectory,'images_3d_vsecs/'];
 nextension='.jpg';
 %wspacename='1p53a0_3_3dmatlab_perturb.mat';
-wspacename=[rdirectory,'_ydir_vvt_bv20G.mat']
+wspacename=[directory,'matlabdat/',rdirectory,'_ydir_vvt.mat']
 
 
 evelchrom_vh=zeros(nt,124);  %  horizontal section in chrom at  20

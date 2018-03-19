@@ -13,6 +13,8 @@ module load apps/matlab/2014a
 
 export TIMECOUNTER=0
 source timeused
-   matlab -nosplash -r "plot_example_secs_array"
+#   matlab -nosplash -r "plot_example_secs_array"
+ matlab -nosplash -r "plotsecs_isocontour_2d_array"
+
 source timeused
 

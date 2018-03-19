@@ -1,12 +1,14 @@
 
 %ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
-ndirectory=[directory,'im_2d_vperp/'];
+ndirectory=[directory,'imp_2d_deltap/'];
 imfile=[ndirectory,'im1t_',id,nextension];
 
 figure('Visible','off','IntegerHandle','Off');
 
 %figure;
 hold on;
+
+
 
 
 %plot sections through 3d array
@@ -24,15 +26,38 @@ hold on;
    ay=y(nrange);
    az=z(nrange);
    [x1,x2,x3] = meshgrid(ax,ay,az);
-   val1=reshape(wd(3,nrange,nrange,nrange),124,124,124);
-   val3=reshape(wd(4,nrange,nrange,nrange),124,124,124);
-   val2=reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124);
+   %typedef enum vars {rho, mom1, mom2, mom3, energy, b1, b2, b3,energyb,rhob,b1b,b2b,b3b} CEV;
+
+%compute background pressure
+ val2=reshape(wd(1,nrange1,nrange2,nrange3)+wd(10,nrange1,nrange2,nrange3),nxo,nyo,nzo);
+
+TP=reshape(wd(5,nrange,nrange,nrange),124,124,124);
+TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+wd(4,nrange,nrange,nrange).^2)./(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange)),124,124,124);
+TP=(gamma-1.d0).*TP;
+val4=TP;
 
 
-   val1=(val1./val2);
-   val3=(val3./val2);
 
-   val4=sqrt(val1.^2 + val3.^2);
+
+TP= -0.5*reshape((wd(6,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)).^2,124,124,124);
+TP=TP-reshape((wd(6,nrange,nrange,nrange).*wd(11,nrange,nrange,nrange))+(wd(7,nrange,nrange,nrange).*wd(12,nrange,nrange,nrange))+(wd(8,nrange,nrange,nrange).*wd(13,nrange,nrange,nrange)),124,124,124);
+TP=(gamma-2.d0).*TP;
+val4=val4+TP;
+
+
+
+%TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+
+
+
+
+
+
+   %val4=sqrt(val1.^2 + val3.^2);
+
+
+
+
 
    myval=shiftdim(val4,1);
    
@@ -148,8 +173,7 @@ minv=min(min(min(TP1)));
   %h=slice(myval,105, 96,8);
   %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
   %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 10 20],'ShowText','on');
- [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 4 6 8],'ShowText','on');
-
+ [C,hcs1]=contour((reshape(mytval(:,:,49),[124 124]))',[1 4 6 8],'ShowText','on');
 clabel(C,hcs1)
 set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
 set(findobj(gca,'Type','patch','UserData',2),'EdgeColor',[0 1 0])
@@ -162,13 +186,13 @@ set(findobj(gca,'Type','patch','UserData',6),'EdgeColor',[0 1 0])
 %end
  
  hold on 
-  sect=myval( 65,:,:);
+  sect=myval( :,:,49);
 h=surf((reshape(sect,[124 124]))','LineStyle','none');
   view(0,90);
 % view(-37.5,15);
   
   
- hcs=contour((reshape(TP1(65,:,:),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
+ hcs=contour((reshape(TP1(:,:,49),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
 
  
 
@@ -290,11 +314,6 @@ h=surf((reshape(sect,[124 124]))','LineStyle','none');
 
 
 
-
-maxval=max(max(sect));
-minval=min(min(sect));
-
-
   
   if min3<minval
       minval=min3;
@@ -312,8 +331,8 @@ minval=min(min(sect));
      ;% maxval=100;
   end
   
-maxval=0.22;
-minval=0;
+maxval=0.000015;
+minval=-0.000005;
 
   cmap=colormap(jet(256));
   caxis([minval maxval]);
@@ -339,7 +358,7 @@ hold on;
   xlabel('y-distance (Mm)');
   ylabel('Height (Mm)');
   
-  ylabel(hc,'Transverse Velocity [m/s]');
+  ylabel(hc,'Perturbed Pressure [Pa]');
   
   set(gca,'Xdir','reverse')
   

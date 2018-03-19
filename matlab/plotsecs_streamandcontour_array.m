@@ -13,7 +13,8 @@
 %directory='/fastdata/cs1mkg/smaug/washing_mach/';
 %directory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/';
 %directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
-directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
+%directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
+directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/';
 
 
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
@@ -32,12 +33,13 @@ extension='.out';
 %ndirectory='/fastdata/cs1mkg/smaug/washing_mach/images_3d_vsecs_mag/';
 %ndirectory='/fastdata/cs1mkg/smaug/spic_4b0_bv20G/images_3d_vsecs_magc/';
 %ndirectory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/images_3d_vsecs_magc/';
-ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/images_3d_vsecs_magc/';
+%ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/images_3d_vsecs_magc/';
+ndirectory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/images_3d_vsecs_magc/';
 
 %ndirectory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/images_3d_vsecs';
 nextension='.jpg';
 figure;
-for i=180:1:180
+for i=1:5:928
 %for i=1519:2632
 %for i=2631:2632
     
@@ -225,7 +227,7 @@ mx3=shiftdim(x3,1);
 %   
   colormap(jet(256));
 
-if i>30
+if i>20
    % hcs=contourslice(mytval,[],[],[35 49 80]);
  % hcs=contourslice(mytval,[],[],[49 80]);
  hcs=contourslice(mytval,[],[],[49 80 ]);

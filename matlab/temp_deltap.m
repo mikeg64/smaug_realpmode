@@ -1,7 +1,11 @@
 
+%ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
+ndirectory=[directory,'im_2d_deltap/'];
+imfile=[ndirectory,'im1t_',id,nextension];
 
+figure('Visible','off','IntegerHandle','Off');
 
-figure;
+%figure;
 hold on;
 
 
@@ -123,9 +127,9 @@ TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,
 %TP=(gamma-1.d0).*TP;
 %TP=shiftdim(mu_gas.*TP./R./val2,1);
 
-mu=1.0;
-TP1=(1.0/gamma*mu)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
-TP1=sqrt(TP1);
+%mu=1.0;
+TP1=(1.0/gamma)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
+TP1=sqrt(mu)*1.0e4*sqrt(TP1);
 TP1=shiftdim(TP1,1);
 
    maxv=max(max(max(TP1)));
@@ -167,9 +171,9 @@ minv=min(min(min(TP1)));
  % h=slice(myval,96, 96,[5 49 ]);  %used for 0,1 mode
 
   %h=slice(myval,105, 96,8);
-  [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
-
-
+  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
+  %[C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 5 10 20],'ShowText','on');
+ [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 4 6 8],'ShowText','on');
 clabel(C,hcs1)
 set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
 set(findobj(gca,'Type','patch','UserData',2),'EdgeColor',[0 1 0])
@@ -307,8 +311,7 @@ h=surf((reshape(sect,[124 124]))','LineStyle','none');
  % maxval=50;
  % minval=-50;
 
-maxval=max(max(sect));
-minval=min(min(sect));
+
 
 
   
@@ -355,7 +358,7 @@ hold on;
   xlabel('y-distance (Mm)');
   ylabel('Height (Mm)');
   
-  ylabel(hc,'Vz [m/s]');
+  ylabel(hc,'Perturbed Pressure [Pa]');
   
   set(gca,'Xdir','reverse')
   

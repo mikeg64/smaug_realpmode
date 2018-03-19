@@ -1,13 +1,16 @@
 
 
 %directory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/';
-directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/';
+%directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
 
+directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv100G/';
 
 
 
 %ndirectory='/fastdata/cs1mkg/smaug/p5b2_2_bv200g/images_3d_vsecs_magc/';
-ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
+%ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv150G/images_3d_vsecs_magc/';
+ndirectory=[directory,'images_3d_vsecs_magc/']
+%ndirectory=[directory,'images_3d_vsecs/'];
 
 %ndirectory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/images_3d_vsecs';
 
@@ -28,12 +31,13 @@ nrange=3:126;
 
 
 
+for i=[75  151]
 
+%for i=[75 76 151 225 226 330]
+%for i=1:2:710
 
-for i=250:1:250
-
-%figure('Visible','off','IntegerHandle','Off');
-%  hold on;
+figure('Visible','off','IntegerHandle','Off');
+  hold on;
 
 %for i=1519:2632
 %for i=2631:2632
@@ -91,6 +95,7 @@ disp([id filename]);
  
   % extract variables from w into variables named after the strings in wnames
 wd=zeros(nw,nx1,nx2,nx3);
+%vels=zeros(4,nx1,nx2,n3);
 for iw=1:nw
   
      tmp=reshape(w(:,iw),nx1,nx2,nx3);
@@ -150,10 +155,19 @@ clear tmp;
    val3=(val3./val2);
 
    %val4=sqrt(val1.^2 + val3.^2);
+	rmu=1.257E-6;
 
    myval=shiftdim(val4,1);
    
-     
+     wd(6,:,:,:)=10000*sqrt(rmu).* wd(6,:,:,:);
+     wd(7,:,:,:)=10000*sqrt(rmu).* wd(7,:,:,:);
+     wd(8,:,:,:)=10000*sqrt(rmu).* wd(8,:,:,:);
+
+     wd(11,:,:,:)=10000*sqrt(rmu).* wd(11,:,:,:);
+     wd(12,:,:,:)=10000*sqrt(rmu).* wd(12,:,:,:);
+     wd(13,:,:,:)=10000*sqrt(rmu).* wd(13,:,:,:);
+
+
     val3=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
     val2=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
     val1=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
@@ -187,6 +201,7 @@ mx3=shiftdim(x3,1);
 	mu=1.257E-6;
 	mu_gas=0.6;
 	gamma=1.66667;
+
  
      %typedef enum vars {rho, mom1, mom2, mom3, energy, b1, b2, b3,energyb,rhob,b1b,b2b,b3b} CEV;
 
@@ -214,13 +229,23 @@ TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+w
 TP=(gamma-1.d0).*TP;
 TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 
+cs=sqrt(gamma.*TP./(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)));
+%calf=1.0e4*sqrt(mu)*sqrt((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)));
+calf=sqrt((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)));
+
+cfast=sqrt(0.5*(cs.*cs+calf.*calf)+0.5*sqrt((cs.*cs+calf.*calf).^2-4*(calf.*cs).^2));
+cslow=sqrt(0.5*(cs.*cs+calf.*calf)-0.5*sqrt((cs.*cs+calf.*calf).^2-4*(calf.*cs).^2));
+cs=shiftdim(cs,1);
+calf=shiftdim(calf,1);
+cslow=shiftdim(cslow,1);
+cfast=shiftdim(cfast,1);
 
 
 %TP=(gamma-1.d0).*TP;
 %TP=shiftdim(mu_gas.*TP./R./val2,1);
 
-mu=1.0;
-TP1=(1.0/gamma*mu)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
+%mu=1.0;
+TP1=mu*1.0e8*(1.0/gamma)*((reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124))./TP);
 TP1=sqrt(TP1);
 TP1=shiftdim(TP1,1);
 
@@ -263,14 +288,14 @@ minv=min(min(min(TP1)));
  % h=slice(myval,96, 96,[5 49 ]);  %used for 0,1 mode
 
   %h=slice(myval,105, 96,8);
-  [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
+%%  [C,hcs1]=contour((reshape(mytval(65,:,:),[124 124]))',[1 2 4 6],'ShowText','on');
 
 
-clabel(C,hcs1)
-set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
-set(findobj(gca,'Type','patch','UserData',2),'EdgeColor',[0 1 0])
-set(findobj(gca,'Type','patch','UserData',4),'EdgeColor',[0 1 0])
-set(findobj(gca,'Type','patch','UserData',6),'EdgeColor',[0 1 0])
+%%clabel(C,hcs1)
+%%set(findobj(gca,'Type','patch','UserData',1),'EdgeColor',[0 1 0])
+%%set(findobj(gca,'Type','patch','UserData',2),'EdgeColor',[0 1 0])
+%%set(findobj(gca,'Type','patch','UserData',4),'EdgeColor',[0 1 0])
+%%set(findobj(gca,'Type','patch','UserData',6),'EdgeColor',[0 1 0])
 
 
 %for n=1:length(hcs1)
@@ -284,7 +309,7 @@ h=surf((reshape(sect,[124 124]))','LineStyle','none');
 % view(-37.5,15);
   
   
- hcs=contour((reshape(TP1(65,:,:),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
+%% hcs=contour((reshape(TP1(65,:,:),[124 124]))',[0.5 1.0 1.5 2.0],'ShowText','on');
 
  
 
@@ -424,8 +449,8 @@ minval=min(min(sect));
      ;% maxval=100;
   end
   
-%maxval=2.0;
-%minval=0;
+maxval=5.0;
+minval=-5;
 
   cmap=colormap(jet(256));
   caxis([minval maxval]);
@@ -458,6 +483,11 @@ hold on;
   print('-djpeg', imfile);
   
   hold off
+
+%temp_deltap
+%temp_vperp
+%temp_ef
+%temp_vlong
   
 
     

@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -j y
 #$ -V 
-#$ -N tsecs
+#$ -N tsecs2a
 #$ -l mem=18G
 
 #$ -l rmem=18G
@@ -18,7 +18,7 @@ module load apps/matlab/2014a
 #source timeused
 #   matlab -nosplash -r "plot_example_secs_array2"
 
- matlab -nosplash -r "plotsecs_isocontour_array"
+ matlab -nosplash -r "plotsecsp_isocontour_2d_array"
 
 
 #source timeused

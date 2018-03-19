@@ -16,7 +16,8 @@
 %directory='/fastdata/cs1mkg/smaug/spic6b0_3d_rep/';
 % directory='/fastdata/cs1mkg/smaug/spic6b0_1_3d/';
 %directory='/fastdata/cs1mkg/smaug/spic6b0_3_3d/';
-directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/';
+%directory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/';
+directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2_bv50G/';
 %directory='/fastdata/cs1mkg/smaug/spic2p00a_0_1_3d/';
 %directory='/fastdata/cs1mkg/smaug/spic2p3a_0_3_3d/';
 %directory='/fastdata/cs1mkg/smaug/spic1p79a_0_0_3d/';
@@ -42,7 +43,7 @@ extension='.out';
 %ndirectory='/fastdata/cs1mkg/smaug/spic6b0_3_3d/images';
 % ndirectory='/fastdata/cs1mkg/smaug/spic4b0_3d/images';
 %ndirectory='/fastdata/cs1mkg/smaug/spic4p71a_1_1_3d/images';
- ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/images';
+% ndirectory='/fastdata/cs1mkg/smaug/spic_5b2_2_bv20G/images';
 %ndirectory='/fastdata/cs1mkg/smaug/spic6b0_3d_rep/images';
 % ndirectory='/fastdata/cs1mkg/smaug/spic6b0_2_3d/images';
 % ndirectory='/fastdata/cs1mkg/smaug/spic6b0_1_3d/images';
@@ -58,13 +59,13 @@ extension='.out';
 %ndirectory='/fastdata/cs1mkg/smaug/spic0p63a_0_3_3d/images';
 %ndirectory='/fastdata/cs1mkg/smaug/spic0p63a_0_3_3d/images';
 %ndirectory='/fastdata/cs1mkg/smaug/spic0p63a_0_3_3d/images';
-
+ndirectory=[directory,'images'];
 nextension='.jpg';
 
 %wspacename='0p63a0_3_3dmatlab_perturb.mat';
 %wspacename='1p53a0_3_3dmatlab_perturb.mat';
 %wspacename='2p00a0_1_3dmatlab_perturb.mat';
- wspacename='5b2_2_bv20G_matlab_perturb.mat';
+% wspacename='5b2_2_bv25G_matlab_eflux.mat';
 % wspacename='s1p79a_0_0_matlab_perturb.mat';
 %wspacename='3p0a_3dmatlab_perturb.mat';
 %wspacename='4p3a_3dmatlab_perturb.mat';
@@ -82,6 +83,12 @@ nextension='.jpg';
 %wspacename='2p35a2_2_3dmatlab_perturb.mat';
 %  wspacename='0p63a0_3_3dmatlab_perturb.mat';
 % wspacename='4b0_3dmatlab_perturb.mat';
+
+wspacename=[directory,'matlabdat/','5b2_2_bv50G_matlab_eflux.mat']
+
+
+
+
 %nt=890;
 %nt=889;
 %nt=1203;
@@ -94,8 +101,8 @@ nextension='.jpg';
 
 i=0;
 %  load(wspacename);
- nt=499;
- nt=1140;
+% nt=499;
+ nt=928;
 %  i=0;
 % i=193;
 iinit=i+1;
