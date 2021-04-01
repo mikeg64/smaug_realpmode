@@ -349,7 +349,6 @@ clear tmp;
 %   
   % xlabel(hc,'Vz [m/s]');
   %hc.Label.String = 'Vz [m/s]';
-  title(hc,'Vz [m/s]');
     hold off
 
 %nexttile 
