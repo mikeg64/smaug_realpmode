@@ -12,6 +12,6 @@ module load apps/matlab/2021a/binary
 
 export TIMECOUNTER=0
 source timeused
-   matlab -nosplash -nojvm -r "pvvt300_22_beta"
+   matlab -nosplash -nojvm -r "pvvt300_22_0g_beta"
 source timeused
 

@@ -18,24 +18,33 @@ matfile=[directory,'pvvt.mat'];
 
 %load(matfile);
 
-evelv=evel2Mm;
+evelv=evel2Mm_vh;
+ss1=evelv;
 sz=size(evelv);
-nt=sz(3);
+nt=sz(1);
 
-ss1=reshape(evelv(62,:,:),[124,nt]);
-s1=surf(ss1(1:45,1:700));  %low and mid chromosphere
+%ss1=reshape(evelv(62,:,:),[124,nt]);
+s1=surf(ss1(1:600,1:45)');  %low and mid chromosphere
 s1.EdgeColor = 'none';
+s1.FaceAlpha=0.5;
+
+
+hold on
+ss2=evel2Mm_bet';
+[M,c]=contour(ss2(1:45,1:600));
+c.LineWidth = 2;
+
 
 zlimv=3*[-1 1];
 
 
-xlimv=[0 700]; %time limit
+xlimv=[0 600]; %time limit
 ylimv=[0 45];
 
 hc=colorbar();
 caxis(zlimv);
 
-%yticks={'0';'0.6667';'1.333';'2.0';'2.667';'3.333';'4.0'};
+yticks={'0';'0.6667';'1.333';'2.0';'2.667';'3.333';'4.0'};
 yticks=cell(11,1);
 for i=1:11
    yticks{i,1} = sprintf('%.2f',0.0625+5*(i-1)*0.03125);
