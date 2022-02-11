@@ -35,6 +35,17 @@ evel2Mm_bet=zeros(nt,124);  %vertical section at 2Mm  62
 evel1Mm_bet=zeros(nt,124);  %vertical section at 1Mm  31
 evelp5Mm_bet=zeros(nt,124);  %vertical section at 0.5Mm 15
 
+
+
+evelchrom_t=zeros(nt,124);  %  horizontal section in chrom at  20
+eveltran_t=zeros(nt,124);   %  horizontal section in transition layer at 42
+evelcor_t=zeros(nt,124);    %  horizontal section in corona at 90
+
+evel2Mm_t=zeros(nt,124);  %vertical section at 2Mm  62
+evel1Mm_t=zeros(nt,124);  %vertical section at 1Mm  31
+evelp5Mm_t=zeros(nt,124);  %vertical section at 0.5Mm 15
+
+
 for i=1:1:nt
 %for i=1:100:nt
 %for i=1519:2632
@@ -141,17 +152,20 @@ clear tmp;
 
 TP=reshape(wd(5,nrange,nrange,nrange)+wd(9,nrange,nrange,nrange),124,124,124);
 TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+wd(4,nrange,nrange,nrange).^2)./(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange)),124,124,124);
-%TP=(gamma-1.d0).*TP;
-%TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+TP=(gamma-1.d0).*TP;
+TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 
 
-TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+%TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 
 
- val3b=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu); 
- val2b=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu); 
- val1b=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu);
+%  val3b=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu); 
+%  val2b=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu); 
+%  val1b=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu);
 
+ val3b=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124); 
+ val2b=reshape(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange),124,124,124); 
+ val1b=reshape(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange),124,124,124);
 
 
 
@@ -161,12 +175,13 @@ val4b=(val1b.^2 + val3b.^2+val2b.^2);
 
 %val4b=2*mu*R*(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)).*TP./val4b;
 %val4b=2*mu.*TP./val4b; %plasma beta
-val4b=TP;
-val4b=(val4b/2)./((gamma-1.0d0).*TP);
+%val4b=TP;
+%val4b=(val4b/2)./((gamma-1.0d0).*TP);
+val4b=(val4b/2)./(TP);
 
+temp=TP./(    R.*(    reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)    )      );
 
-
-
+mytempval=shiftdim(temp,1);
 
 mytval=shiftdim(val4b,1);   
     
@@ -198,6 +213,13 @@ mytval=shiftdim(val4b,1);
     evel1Mm_bet(i,:)=mytval(62,31,:);  %vertical section at 1Mm  31
     evelp5Mm_bet(i,:)=mytval(62,15,:);  %vertical section at 0.5Mm 15
     
+    evelchrom_t(i,:)=mytempval( 62,:,20);  %  horizontal section in chrom at  20
+    eveltran_t(i,:)=mytempval( 62,:,42);   %  horizontal section in transition layer at 42
+    evelcor_t(i,:)=mytempval( 62,:,90);    %  horizontal section in corona at 90
+
+    evel2Mm_t(i,:)=mytempval(62,62,:);  %vertical section at 2Mm  62
+    evel1Mm_t(i,:)=mytempval(62,31,:);  %vertical section at 1Mm  31
+    evelp5Mm_t(i,:)=mytempval(62,15,:);  %vertical section at 0.5Mm 15
     
 
 %sabx=reshape(wd(11,nrange,nrange,nrange),124,124,124);
