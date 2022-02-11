@@ -26,12 +26,12 @@ nt=sz(1);
 %ss1=reshape(evelv(62,:,:),[124,nt]);
 s1=surf(ss1(1:600,1:45)');  %low and mid chromosphere
 s1.EdgeColor = 'none';
-s1.FaceAlpha=0.7;
+s1.FaceAlpha=0.5;
 
 
 hold on
 ss2=evel2Mm_bet';
-[M,c]=contour(1.0e8*ss2(1:45,1:600),4);
+[M,c]=contour(ss2(1:45,1:600)/);
 c.LineWidth = 2;
 
 
