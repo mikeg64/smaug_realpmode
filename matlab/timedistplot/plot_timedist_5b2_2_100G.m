@@ -31,8 +31,8 @@ s1.FaceAlpha=0.7;
 
 hold on
 ss2=evel2Mm_bet';
-[M,c]=contour(1.0e8*ss2(1:45,1:600),4);
-c.LineWidth = 2;
+ [M,c]=contour(1.0e8*ss2(1:45,1:600),4);
+ c.LineWidth = 2;
 
 
 zlimv=3*[-1 1];

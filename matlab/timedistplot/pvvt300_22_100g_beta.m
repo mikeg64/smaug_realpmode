@@ -6,6 +6,16 @@ rdirectory='spic_5b2_2_bv100G';
 nt=830;
 
 
+
+
+
+
+
+
+
+
+
+
 %directory='/fastdata/cs1mkg/smaug/spic5b0_2_3d_rep/';
 directory=[bdir,rdirectory,'/'];
 extension='.out';
@@ -48,7 +58,7 @@ evelp5Mm_t=zeros(nt,124);  %vertical section at 0.5Mm 15
 
 for i=1:1:nt
 %for i=1:100:nt
-%for i=1519:2632
+%for i=76:74:150
 %for i=2631:2632
     
 
@@ -146,17 +156,42 @@ clear tmp;
 	mu_gas=0.6;
 	gamma=1.66667;
     
+
+    
+    
+% original IDL routine from
+% https://github.com/mikeg64/smaug/blob/master/smaug/Idl/visex33D_kink1_test1.pro
+
+%  T[*,*,*]=(w[*,*,*,4]+w[*,*,*,8])
+% 
+% T[*,*,*]=T[*,*,*]-(w[*,*,*,1]^2.0+w[*,*,*,2]^2.0+w[*,*,*,3]^2.0)/(w[*,*,*,0]+w[*,*,*,9])/2.0
+% 
+% T[*,*,*]=T[*,*,*]-((w[*,*,*,5]+w[*,*,*,10])^2.0+(w[*,*,*,6]+w[*,*,*,11])^2.0+(w[*,*,*,7]+w[*,*,*,12])^2.0)/2.d0
+% 
+% beta=dblarr(n1,n2,n3)
+% 
+% beta[*,*,*]=(((w[*,*,*,5]+w[*,*,*,10])*sqrt(mu)*1.0e4)^2.0+((w[*,*,*,6]+w[*,*,*,11])*sqrt(mu)*1.0e4)^2.0+$
+%               ((w[*,*,*,7]+w[*,*,*,12])*sqrt(mu)*1.0e4)^2.0)/2.0/((gamma-1.d0)*T[*,*,*])
+% 
+% 
+% T[*,*,*]=(gamma-1.d0)*T[*,*,*]   
+    
+    
+    
+    
+    
+    
     
     
     %compute temperature
 
 TP=reshape(wd(5,nrange,nrange,nrange)+wd(9,nrange,nrange,nrange),124,124,124);
 TP=TP-0.5*reshape((wd(2,nrange,nrange,nrange).^2+wd(3,nrange,nrange,nrange).^2+wd(4,nrange,nrange,nrange).^2)./(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange)),124,124,124);
-TP=(gamma-1.d0).*TP;
-TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+%TP=(gamma-1.d0).*TP;
+%TP=TP-(gamma-2.d0).*0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 
 
-%TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
+TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(wd(7,nrange,nrange,nrange)+wd(12,nrange,nrange,nrange)).^2+(wd(8,nrange,nrange,nrange)+wd(13,nrange,nrange,nrange)).^2,124,124,124);
 
 
 %  val3b=reshape(wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange),124,124,124)*1.0e4*sqrt(mu); 
@@ -176,10 +211,11 @@ val4b=(val1b.^2 + val3b.^2+val2b.^2);
 %val4b=2*mu*R*(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)).*TP./val4b;
 %val4b=2*mu.*TP./val4b; %plasma beta
 %val4b=TP;
-%val4b=(val4b/2)./((gamma-1.0d0).*TP);
-val4b=(val4b/2)./(TP);
+val4b=(val4b/2)./((gamma-1.0d0).*TP);
+%val4b=(val4b/2)./(TP);
 
-temp=TP./(    R.*(    reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)    )      );
+%temp=TP./(    R.*(    reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)    )      );
+temp=(gamma-1.0d0).*TP;
 
 mytempval=shiftdim(temp,1);
 
