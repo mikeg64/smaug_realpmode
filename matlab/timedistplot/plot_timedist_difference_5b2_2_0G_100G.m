@@ -17,8 +17,8 @@ directory=[bdir,rdirectory,'/'];
 matfile=[directory,'pvvt.mat'];
 
 %load(matfile);
-evelv0G=evel2Mm_vh;
-evelv=evel2Mm_vh;
+evelv0G=evel2Mm_vh_0G;
+evelv=evel2Mm_vh(1:617,:)-evelv0G;
 ss1=evelv;
 sz=size(evelv);
 nt=sz(1);
