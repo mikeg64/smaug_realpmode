@@ -30,11 +30,19 @@ s1.FaceAlpha=0.7;
 
 
 hold on
-ss2=evel2Mm_bet';
- [M,c]=contour(1.0e8*ss2(1:45,1:600),4);
+
+ss2=sqrt(evel2Mm_b)'; %plotting in units of kG
+test=(((ss2-(min(min(ss2(:,1:700)))))*1000000));
+
+ [M,c]=contour(test(1:45,1:600),4);
  c.LineWidth = 2;
 
 
+ss3=1e4*(evel2Mm_bet)'; %plotting 1/beta
+ [M,c]=contour(ss3(1:45,1:600),1,'linecolor','r');
+ c.LineWidth = 2; 
+ 
+ 
 zlimv=3*[-1 1];
 
 

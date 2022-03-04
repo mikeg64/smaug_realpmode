@@ -35,6 +35,18 @@ evel2Mm_bet=zeros(nt,124);  %vertical section at 2Mm  62
 evel1Mm_bet=zeros(nt,124);  %vertical section at 1Mm  31
 evelp5Mm_bet=zeros(nt,124);  %vertical section at 0.5Mm 15
 
+
+
+
+evelchrom_b=zeros(nt,124);  %  horizontal section in chrom at  20
+eveltran_b=zeros(nt,124);   %  horizontal section in transition layer at 42
+evelcor_b=zeros(nt,124);    %  horizontal section in corona at 90
+
+evel2Mm_b=zeros(nt,124);  %vertical section at 2Mm  62
+evel1Mm_b=zeros(nt,124);  %vertical section at 1Mm  31
+evelp5Mm_b=zeros(nt,124);  %vertical section at 0.5Mm 15
+
+
 for i=1:1:nt
 %for i=1:100:nt
 %for i=1519:2632
@@ -136,8 +148,6 @@ clear tmp;
 	gamma=1.66667;
     
     
-    
-     
 % original IDL routine from
 % https://github.com/mikeg64/smaug/blob/master/smaug/Idl/visex33D_kink1_test1.pro
 
@@ -185,7 +195,13 @@ TP=TP-0.5*reshape((wd(6,nrange,nrange,nrange)+wd(11,nrange,nrange,nrange)).^2+(w
 
     
     
-val4b=(val1b.^2 + val3b.^2+val2b.^2);
+val4b=mu*(val1b.^2 + val3b.^2+val2b.^2);
+
+mybval=shiftdim(val4b,1);
+
+%val4b=2*mu.*TP./val4b;
+
+
 
 %val4b=2*mu*R*(reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)).*TP./val4b;
 %val4b=2*mu.*TP./val4b; %plasma beta
@@ -194,25 +210,11 @@ val4b=(val4b/2)./((gamma-1.0d0).*TP);
 %val4b=(val4b/2)./(TP);
 
 %temp=TP./(    R.*(    reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124)    )      );
-temp=(gamma-1.0d0).*TP;
+%pres=(gamma-1.0d0).*TP;
 
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-mytempval=shiftdim(temp,1);
+%mybval=shiftdim(pres,1);
 
 mytval=shiftdim(val4b,1);   
-
-
-
-
     
     
 %  x-direction    
@@ -242,14 +244,14 @@ mytval=shiftdim(val4b,1);
     evel1Mm_bet(i,:)=mytval(62,31,:);  %vertical section at 1Mm  31
     evelp5Mm_bet(i,:)=mytval(62,15,:);  %vertical section at 0.5Mm 15
     
-     evelchrom_t(i,:)=mytempval( 62,:,20);  %  horizontal section in chrom at  20
-    eveltran_t(i,:)=mytempval( 62,:,42);   %  horizontal section in transition layer at 42
-    evelcor_t(i,:)=mytempval( 62,:,90);    %  horizontal section in corona at 90
+    evelchrom_b(i,:)=mybval( 62,:,20);  %  horizontal section in chrom at  20
+    eveltran_b(i,:)=mybval( 62,:,42);   %  horizontal section in transition layer at 42
+    evelcor_b(i,:)=mybval( 62,:,90);    %  horizontal section in corona at 90
 
-    evel2Mm_t(i,:)=mytempval(62,62,:);  %vertical section at 2Mm  62
-    evel1Mm_t(i,:)=mytempval(62,31,:);  %vertical section at 1Mm  31
-    evelp5Mm_t(i,:)=mytempval(62,15,:);  %vertical section at 0.5Mm 15   
-
+    evel2Mm_b(i,:)=mybval(62,62,:);  %vertical section at 2Mm  62
+    evel1Mm_b(i,:)=mybval(62,31,:);  %vertical section at 1Mm  31
+    evelp5Mm_b(i,:)=mybval(62,15,:);  %vertical section at 0.5Mm 15
+    
 %sabx=reshape(wd(11,nrange,nrange,nrange),124,124,124);
 %saby=reshape(wd(12,nrange,nrange,nrange),124,124,124);
 %sabz=reshape(wd(13,nrange,nrange,nrange),124,124,124);
