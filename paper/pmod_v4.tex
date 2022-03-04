@@ -1,3 +1,34 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %% this version for robertus to review 1st October 2021
 %% Beginning of file 'sample63.tex'
 %%
@@ -278,6 +309,7 @@
 
 \begin{abstract}
 
+{\bcr v4 after editorial request to remove duplication} 
 
 The aim of the work reported in this paper is to gain understanding of the propagation characteristics of p-mode oscillations in the highly gravitationally stratified magnetic solar atmosphere. An objective is the measurement of the properties of the solar atmosphere and its magnetic structures. We present a comparison of the analysis of results from observations and numerical simulations.
 
@@ -285,7 +317,7 @@ The paper describes 3D numerical magnetohydrodynamic (MHD) simulations of a mode
 
 The paper reports the variation of the energy flux and oscillation frequency of the magnetosonic modes and examines their dependence on the magnetic field strength. The comparison with observational data indicate the presence of oscillation signals with a frequency close to that measured for the simulated results.
 
-We conclude that magnetic regions of the solar atmosphere are favourable regions for the propagation of energy by slow magnetosonic modes. The obtained periodic behaviour is confirmed by observational data, featuring similar frequencies based on the intensity times series of images taken by the Solar Dynamics Observatory.
+We conclude that magnetic regions of the solar atmosphere are favourable regions for the propagation of energy by slow magnetosonic modes. The results exhibit a frequency shift, for different values of the magnetic field. The obtained periodic behaviour is confirmed by observational data, featuring similar frequencies based on the intensity times series of images taken by the Solar Dynamics Observatory.
 \end{abstract}
 
 %% Keywords should appear after the \end{abstract} command. 
@@ -393,9 +425,17 @@ Active regions producing flares may have fields which easily exceed the normal r
 Our initial computational studies were applicable to quiet sun regions regions with magnetic fluxes in the range 5-10G this includes the non magnetic solar chromosphere and the quiet inter-network regions between the magnetic flux concentrations. Given the variety of solar atmosphere regions for example the network, inter network, plage and faculae regions it is recognised that the modes of oscillation with periods of 3 and 5 minutes exhibit varying behaviour. In particular is the variation observed for different magnetic structures and reflecting layers such as the transition layer which influences propagation in the upward and downward direction.
 %%CHANGE SAME AS BLOG
 
+\begin{figure}[h]\label{VAL3C_rho_temp_fig1L}
+\includegraphics[scale=1.5]{VAL3C_rho_temp_fig1L.jpg}
+\caption{Temperature and Density profile used for the simulations and based on the VALIIIc model.}
+%%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
+\end{figure}
 
-
-
+\begin{figure}[h]\label{soundspeedVAL3C_profile_fig1R}
+\includegraphics[scale=1.5]{soundspeedVAL3C_profile_fig1R.jpg}
+\caption{Soundspeed and Frequency cutoff for a solar model atmosphere based on the VALIIIc model.}
+%%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
+\end{figure}
 
 %%CHANGE SAME AS BLOG
 %%Given this variety of solar regions it is recognised that the modes of oscillation with periods of 3 and 5 minutes behave in different ways in the solar atmosphere network, inter network, plage and faculae regions. What is striking is the varied behaviour for different magnetic structures and the influence of reflecting layers such as the transition layer influencing upward and downward propagation.
@@ -617,6 +657,25 @@ For the  simulations here, a p-mode driver corresponding to the 5 minute mode, w
 
 
 
+\begin{figure*}\label{vzplot_bv0g_76_150_225}
+\includegraphics[scale=0.146]{vz_bv0g_76_150_225.jpg}
+\caption{Vertical Component of the Velocity for Different Sections of the Simulation for 76s, 150s and 225s for a magnetic field of 0G.}
+%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
+\end{figure*}
+
+
+
+\begin{figure*}\label{vzplot_dif_bv100g_0g_76_150_225}
+\includegraphics[scale=0.146]{vzplot_dif_bv100g_0g_76_150_225.jpg}
+\caption{Vertical Component of the Velocity Difference for two different magnetic field configurations for Different Sections of the Simulation for 76s, 150s and 225s for a magnetic field of 0G.}
+%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
+\end{figure*}
+
+
+
+
+
+
  
 
 %%CHANGE SAME AS ASR
@@ -712,12 +771,50 @@ Magnetic Field (G)   &  1Mm  &  2Mm &  4Mm & 5.5Mm \\
 
 \begin{figure}
 \centering
-\label{dt_vvert_100G_300s_180s}
+\label{td_vert_bv100G_300_with_bandbeta}
 %\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
-\includegraphics[scale=0.3]{dt-5b2_2_100G-midchrom.jpg}
-\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere.}
+\includegraphics[scale=0.3]{td_vert_bv100G_300_with_bandbeta.jpg}
+\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, contours show the reciprocal of the plasma beta also shown are contours for the perturbed magnetic field.}
 %\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
 \end{figure}
+
+\begin{figure}
+\centering
+\label{td_vert_bv0G_300}
+%\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
+\includegraphics[scale=0.3]{td_vert_bv0G_300.jpg}
+\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, for the case with magnetic field of 0G}
+%\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
+\end{figure}
+
+
+\begin{figure}
+\centering
+\label{td_vert_bv100G_300_with_bandbeta}
+%\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
+\includegraphics[scale=0.3]{td_vert_bv100G_300_with_bandbeta.jpg}
+\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, for the case with magnetic field of 100G, showing the line of beta equal to 0.97 and contours for the perturbed magnetic field}
+%\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
+\end{figure}
+
+\begin{figure}
+\centering
+\label{td_vert_dif_bv0G_100G_300}
+%\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
+\includegraphics[scale=0.3]{td_vert_dif_bv0G_100G_300.jpg}
+\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, for the case of the difference between 0G and 100G, showing the line of beta equal to 0.97 and contours for the perturbed magnetic field}
+%\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
+\end{figure}
+
+
+
+
+
+
+
+
+
+
 
 
 %%CHANGE SAME AS ASR
@@ -943,7 +1040,7 @@ The authors thank P. H. Keys for providing the wavelet tools to analyse the rela
 
 \bibitem[{{Griffiths} et~al.(2018a){Griffiths2018a}, {Erd{\'e}lyi}}]{Griffiths2018a}
 {Griffiths}, M., {Erd{\'e}lyi}, R., {Fedun}, V., 2018. {Videos of p-Mode Oscillations in Highly Gravitationally Stratified Magnetic Solar Atmospheres}.
-\newline \url{https://figshare.com/articles/Videos_of_Magnetohydrodynamics_Simulations_of_Solar_Atmosphere_Wave_Dynamics_Generated_by_Solar_Global_Oscillating_Eigenmodes/4818490}
+\newline \url{https://figshare.shef.ac.uk/articles/dataset/Videos_of_p-Mode_Oscillations_in_Highly_Gravitationally_Stratified_Magnetic_Solar_Atmospheres/7378046}
 
 
 
@@ -1066,6 +1163,7 @@ A.~{V{\"o}gler}, S.~{Shelyag}, M.~{Sch{\"u}ssler}, F.~{Cattaneo}, T.~{Emonet},
 \end{document}
 
 % End of file `sample63.tex'.
+
 
 
 
