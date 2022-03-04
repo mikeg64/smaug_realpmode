@@ -15,7 +15,8 @@
 %directory='/fastdata/cs1mkg/smaug/washmc_2p5_2p5_12p5_180_kg/';
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
 %directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2/';
-directory='/Users/mikegriffiths/proj/smaug-realpmode-data/0g/';
+directory='/Users/mikegriffiths/proj/smaug-realpmode-data/100g/';
+directory1='/Users/mikegriffiths/proj/smaug-realpmode-data/0g/';
 
 
 extension='.out';
@@ -57,6 +58,7 @@ for i=[76 150 225 ]
 
 id=int2str(1000*i);
 filename=[directory,'zerospic1__',id,extension];
+filename1=[directory,'zerospic1__',id,extension];
 timetext=['time=',int2str(i),'s'];
 imfile=[ndirectory,'im1_',id,nextension];
 disp([id filename]);
@@ -92,6 +94,55 @@ disp([id filename]);
       %fread(fid,4);
    end
    
+   
+   
+   
+   
+   
+   
+   
+   
+      fid1=fopen(trim(filename1));
+   %fseek(fid,pictsize(ifile)*(npict(ifile)-1),'bof');
+   headline=trim(setstr(fread(fid1,79,'char')'));
+   it=fread(fid1,1,'integer*4'); time=fread(fid1,1,'float64');
+ 
+   ndim=fread(fid1,1,'integer*4');
+   neqpar=fread(fid1,1,'integer*4'); 
+   nw=fread(fid1,1,'integer*4');
+   nx=fread(fid1,3,'integer*4');
+   
+   nxs=nx(1)*nx(2)*nx(3);
+   varbuf=fread(fid1,7,'float64');
+   
+   gamma=varbuf(1);
+   eta=varbuf(2);
+   g(1)=varbuf(3);
+   g(2)=varbuf(4);
+   g(3)=varbuf(5);
+   
+   
+   varnames=trim(setstr(fread(fid1,79,'char')'));
+   
+   for idim=1:ndim
+      X(:,idim)=fread(fid1,nxs,'float64');
+   end
+   
+   for iw=1:nw
+      %fread(fid,4);
+      w1(:,iw)=fread(fid1,nxs,'float64');
+      %fread(fid,4);
+   end
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    nx1=nx(1);
    nx2=nx(2);
    nx3=nx(3);
@@ -104,11 +155,29 @@ disp([id filename]);
  
   % extract variables from w into variables named after the strings in wnames
 wd=zeros(nw,nx1,nx2,nx3);
+wd1=zeros(nw,nx1,nx2,nx3);
 for iw=1:nw
   
      tmp=reshape(w(:,iw),nx1,nx2,nx3);
      wd(iw,:,:,:)=tmp;
 end
+
+for iw=1:nw
+  
+     tmp=reshape(w1(:,iw),nx1,nx2,nx3);
+     wd1(iw,:,:,:)=tmp;
+end
+
+
+%wd=wd-wd1;
+
+
+
+
+
+
+
+
 
 
 %w=tmp(iw);
@@ -118,6 +187,7 @@ clear tmp;
    
    
    fclose(fid);
+   fclose(fid1);
 
 
 
@@ -141,7 +211,7 @@ clear tmp;
 %    val1=reshape(wd(3,nrange,nrange,nrange),124,124,124);
    val3=reshape(wd(4,nrange,nrange,nrange),124,124,124);
     val2=reshape(wd(1,nrange,nrange,nrange)+wd(10,nrange,nrange,nrange),124,124,124);
-
+   val2_1=reshape(wd1(1,nrange,nrange,nrange)+wd1(10,nrange,nrange,nrange),124,124,124);
 
    val1=(val1./val2);
    val3=(val3./val2);
