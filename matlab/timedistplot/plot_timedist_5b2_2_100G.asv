@@ -37,9 +37,9 @@ test=(((ss2-(min(min(ss2(:,1:700)))))*1000000));
  [M,c]=contour(test(1:45,1:600),4);
  c.LineWidth = 2;
 
-zlevs = [0.5 1 50];
-ss3=1./(1.0e4*(evel2Mm_bet)'); %plotting 1/beta
- [M,c]=contour(ss3(1:45,1:600),zlevs,'linecolor','r');
+
+ss3=1e4*(evel2Mm_bet)'; %plotting 1/beta
+ [M,c]=contour(ss3(1:45,1:600),1,'linecolor','r');
  c.LineWidth = 2; 
  
  
