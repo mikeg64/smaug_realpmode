@@ -6,13 +6,13 @@
 figure
 hold on
 
-%      wd(6,:,:,:)=10000*sqrt(rmu).* wd(6,:,:,:);
-%      wd(7,:,:,:)=10000*sqrt(rmu).* wd(7,:,:,:);
-%      wd(8,:,:,:)=10000*sqrt(rmu).* wd(8,:,:,:);
-% 
-%      wd(11,:,:,:)=10000*sqrt(rmu).* wd(11,:,:,:);
-%      wd(12,:,:,:)=10000*sqrt(rmu).* wd(12,:,:,:);
-%      wd(13,:,:,:)=10000*sqrt(rmu).* wd(13,:,:,:);
+     wd(6,:,:,:)=10000*sqrt(rmu).* wd(6,:,:,:);
+     wd(7,:,:,:)=10000*sqrt(rmu).* wd(7,:,:,:);
+     wd(8,:,:,:)=10000*sqrt(rmu).* wd(8,:,:,:);
+
+     wd(11,:,:,:)=10000*sqrt(rmu).* wd(11,:,:,:);
+     wd(12,:,:,:)=10000*sqrt(rmu).* wd(12,:,:,:);
+     wd(13,:,:,:)=10000*sqrt(rmu).* wd(13,:,:,:);
 
 
 
@@ -38,7 +38,7 @@ mytval=shiftdim(val4,1);
 %hcs=contour((reshape(mytval(:,:,64),[124 124]))',[15 30 45 60 70 75],'ShowText','on');  %for 75G AKA 25G
 
 
-hcs=contour((reshape(mytval(:,:,64),[124 124]))',[20 40 60 80 95 100],'ShowText','on');  %for 75G AKA 25G
+[C,hcs]=contour((reshape(mytval(:,:,64),[124 124]))',[20 40 60 80 95 100],'ShowText','on');  %for 75G AKA 25G
 
 
 lab=20:20:120;
@@ -51,6 +51,8 @@ set(gca,'YTickLabel',{'0.63';'1.25';'1.88';'2.50';'3.13';'3.75'})
 %  set(gca,'YTickLabel',{'0.09';'0.99';'1.94';'2.88';'3.83';'4.77';'5.72'})
 xlabel('Distance (Mm)')
 ylabel('Distance (Mm)')
+
+clabel(C,hcs,'FontSize',14,'Color','k','FontName','Courier')
 
 
 

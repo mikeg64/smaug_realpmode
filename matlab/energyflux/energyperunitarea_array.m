@@ -266,10 +266,18 @@ clear tmp;
    myval13=shiftdim(reshape(wd(13,nrange,nrange,nrange),124,124,124),1);
   
    
-   eflux=(gamma-1).*(myval2-((myval5.*myval5+myval6.*myval6+myval7.*myval7)./(2.*myval4))).*(myval5./myval4);
-   eflux=eflux-(gamma-1).*((myval8.*myval8+myval9.*myval9+myval10.*myval10)/2+(myval8.*myval11+myval9.*myval12+myval10.*myval13)).*(myval5./myval4);
-   eflux=eflux+(myval8.*myval11+myval9.*myval12+myval10.*myval13).*(1./(mu)).*(myval5./myval4);
-   eflux=eflux+(myval5.*myval8+myval6.*myval9+myval7.*myval10).*(1./(mu)).*(myval11./myval4);
+%    eflux=(gamma-1).*(myval2-((myval5.*myval5+myval6.*myval6+myval7.*myval7)./(2.*myval4))).*(myval5./myval4);
+%    eflux=eflux-(gamma-1).*((myval8.*myval8+myval9.*myval9+myval10.*myval10)/2+(myval8.*myval11+myval9.*myval12+myval10.*myval13)).*(myval5./myval4);
+%    eflux=eflux+(myval8.*myval11+myval9.*myval12+myval10.*myval13).*(1./(mu)).*(myval5./myval4);
+%    eflux=eflux+(myval5.*myval8+myval6.*myval9+myval7.*myval10).*(1./(mu)).*(myval11./myval4);
+
+
+    eflux=(gamma-1).*(myval2-((myval5.*myval5+myval6.*myval6+myval7.*myval7)./(2.*myval4))).*(myval5./myval4);
+    eflux=eflux-(gamma-1).*0.012566.*((myval8.*myval8+myval9.*myval9+myval10.*myval10).*(myval5./myval4))/2;
+    eflux=eflux+(myval8.*myval11+myval9.*myval12+myval10.*myval13).*(0.012566).*(myval5./myval4);
+    eflux=eflux+(myval5.*myval8+myval6.*myval9+myval7.*myval10).*(0.012566).*(myval11./myval4);
+
+
    for ih=1:124
     %total energy
     temp=sum(myval(:,:,ih));
