@@ -18,7 +18,7 @@ matfile=[directory,'pvvt.mat'];
 
 %load(matfile);
 
-evelv=evel2Mm_vh_0G;
+evelv=evel2Mm_vh;
 ss1=evelv;
 sz=size(evelv);
 nt=sz(1);
@@ -53,9 +53,9 @@ hc=colorbar();
 caxis(zlimv);
 
 yticks={'0';'0.6667';'1.333';'2.0';'2.667';'3.333';'4.0'};
-yticks=cell(11,1);
-for i=1:11
-   yticks{i,1} = sprintf('%.2f',0.0625+5*(i-1)*0.03125);
+yticks=cell(10,1);
+for i=1:10
+   yticks{i,1} = sprintf('%.2f',0.0625+(i-1)*0.234375);
 end
 %yticks={sprintf('%.6f',a), sprintf('%.6f',a), sprintf('%.6f',a), sprintf('%.6f',a)}
 

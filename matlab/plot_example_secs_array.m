@@ -15,7 +15,7 @@
 %directory='/fastdata/cs1mkg/smaug/washmc_2p5_2p5_12p5_180_kg/';
 %directory='/fastdata/cs1mkg/smaug/spicule2p05_0_2_3d/';
 %directory='/shared/sp2rc2/Shared/simulations/smaug_realpmode/fastdata/cs1mkg/smaug/spic_5b2_2/';
-directory='/Users/mikegriffiths/proj/smaug-realpmode-data/100g/';
+directory='/Users/mikegriffiths/proj/smaug-realpmode-data/0g/';
 
 
 extension='.out';

@@ -1,3 +1,4 @@
+
 %% this version for robertus to review 1st October 2021
 %% Beginning of file 'sample63.tex'
 %%
@@ -323,11 +324,18 @@ Early theoretical studies reported in \citet{Roberts1981a} and \citet{Roberts198
 The analysis of \citet{Campbell1989} investigated the role of horizontal Chromospheric magnetic fields in the modification of acoustic modes as well as demonstrating the shift of frequencies they were also able to predict the circumstances under which different Chromospheric regions would either act as a window permitting the propagation acoustic energy or a sink where the energy is trapped or reflected back into the Chromosphere.  The characteristics of generated waves are dependent on the motions at the footpoints of magnetic field concentrations including those in the intergranular lanes. For example vortex motions have been demonstrated to generate Alfv\'en waves \citet{Fedun2009b}. Much of the theoretical analysis has focused on the effect of magnetic flux tubes on wave propagation and neglected gravitational stratification \citet{Hasan1992} considered an isothermal stratified atmosphere and investigated the influence of vertical fields on a variety of modes including p-mode oscillations. In the limit of weak fields they were able to analyse the spectrum of oscillations in using the modes for a non magnetised stratified atmosphere and the slow magnetoacoustic mode.   The propagation of acoustic oscillations in an isothermal atmosphere with a vertical magnetic field was investigated by \citet{Hindman1996} although small frequency shifts were demonstrated the analysis was unable to demonstrate the absorption of waves  e.g. that is observed in sunspots. 
 
 The link between oscillations in the solar atmosphere and solar global oscillations which are the topic of the computational modelling work described in this paper is described by \citet{Erdelyi2006}.
- An outward propagating wave is reflected inward from the solar upper surface, or boundary layer, because of a sudden decrease in the plasma density, while the lower boundary of the cavity is formed by the increasing sound speed due to temperature rises. For global oscillation modes which exceed the acoustic cutoff frequency, there is wave leakage out from the cavity into the atmosphere. A model for understanding the behaviour of solar global oscillations based on the Klein-Gordon equation was developed by \citet{Taroyan2008}, the model suggests a global resonance. Waves which are normally trapped by a frequency cut-off barrier are enhanced by a resonance enabling propagation into the solar atmosphere. Enhancements to the models described earlier are presented by \citet{Pinter2007}. Here an exponentially decaying horizontal magnetic field is utilised, representing the magnetic carpet. The inhomogeneous 3 layer model leads to characteristic frequencies 
+ An outward propagating wave is reflected inward from the solar upper surface, or boundary layer, because of a sudden decrease in the plasma density, while the lower boundary of the cavity is formed by the increasing sound speed due to temperature rises. For global oscillation modes which exceed the acoustic cutoff frequency, there is wave leakage out from the cavity into the atmosphere. A model for understanding the behaviour of solar global oscillations based on the Klein-Gordon equation was developed by \citet{Taroyan2008}, the model suggests a global resonance. Waves which are normally trapped by a frequency cut-off barrier are enhanced by a resonance enabling propagation into the solar atmosphere. Enhancements to the models described earlier are presented by \citet{Pinter2007}, their work utilised an exponentially decaying horizontal magnetic field as a representation of the magnetic carpet. The inhomogeneous three layer model leads to characteristic frequencies. 
 
  
 
-In this paper, we report the results of numerical simulations of photospheric $p$-mode oscillations in a model solar atmosphere with a uniform and vertical magnetic field. The major difference presented in this paper is the propagation and modification of global oscillations propagating in highly gravitationally stratified solar atmosphere. First, we consider the variety of magnetic structures in the solar atmosphere and address the wave motions that are observed in these regions. This is followed with a description of the solar atmospheric model, magnetic field configuration and the simulation method we used to model $p$-mode oscillations in a model magnetic solar atmosphere.
+We report the results of numerical simulations of photospheric $p$-mode oscillations in a model solar atmosphere with a uniform and vertical magnetic field. The major difference presented in this paper is the propagation and modification of global oscillations propagating in highly gravitationally stratified solar atmosphere.  
+
+{\bcr take action robertus - establish novelty of this work
+we are not saying there is mode conversion but this occurs in complicated structured medium here we are using a uniform medium
+norbi referree 5: A short discussion on observational results would also be an aid to the introduction. At the moment it is not clear to the reader how this paper presents any significant contribution, when compared to a number of previous work.
+
+}
+{\bcr The novelty of this work is a comparison of numerical simulations with observations, demonstrating the link between ubiquitous oscillations and global oscillations modelled using our numerical representation which is of sufficient complexity to represent the dominant dynamical processes in the magnetic solar atmosphere. Further our observational work suggests that such a sampling process to our modelling is sufficient to draw such inferences.} First, we consider the variety of magnetic structures in the solar atmosphere and address the wave motions that are observed in these regions. This is followed with a description of the solar atmospheric model, magnetic field configuration and the simulation method we used to model $p$-mode oscillations in a model magnetic solar atmosphere.
 
 \section{Structures in the Solar Atmosphere} 
 \label{sec:structures}
@@ -349,17 +357,22 @@ Active regions producing flares may have fields which easily exceed the normal r
 Our initial computational studies were applicable to quiet sun regions regions with magnetic fluxes in the range 5-10G this includes the non magnetic solar chromosphere and the quiet inter-network regions between the magnetic flux concentrations. Given the variety of solar atmosphere regions for example the network, inter network, plage and faculae regions it is recognised that the modes of oscillation with periods of 3 and 5 minutes exhibit varying behaviour. In particular is the variation observed for different magnetic structures and reflecting layers such as the transition layer which influences propagation in the upward and downward direction.
 
 
-\begin{figure}[h]\label{VAL3C_rho_temp_fig1L}
-\includegraphics[scale=1.5]{VAL3C_rho_temp_fig1L.jpg}
-\caption{Temperature and Density profile used for the simulations and based on the VALIIIc model.}
+%%\begin{figure}[h]\label{VAL3C_rho_temp_fig1L}
+%%\includegraphics[scale=1.5]{VAL3C_rho_temp_fig1L.jpg}
+%%\caption{Temperature and Density profile used for the simulations and based on the VALIIIc model.}
 %%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
-\end{figure}
+%%\end{figure}
 
-\begin{figure}[h]\label{soundspeedVAL3C_profile_fig1R}
-\includegraphics[scale=1.5]{soundspeedVAL3C_profile_fig1R.jpg}
-\caption{Soundspeed and Frequency cutoff for a solar model atmosphere based on the VALIIIc model.}
+%%\begin{figure}[h]\label{soundspeedVAL3C_profile_fig1R}
+%%\includegraphics[scale=1.5]{soundspeedVAL3C_profile_fig1R.jpg}
+%%\caption{Soundspeed and Frequency cutoff for a solar model atmosphere based on the VALIIIc model.}
 %%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
-\end{figure}
+%%\end{figure}
+
+
+
+
+
 
 
 
@@ -387,12 +400,15 @@ The models reveal that vertical magnetic fields enable energy to reach the coron
 
 In this paper we present results for 3D numerical MHD simulations with an extended driver representing photospheric p-mode oscillations in a magnetic solar atmosphere, the objective is to gain understanding of the propagation characteristics of the p-mode oscillations. 
 
+
+
+
 \section{Numerical Computation Methods}
 
 
 The simulations described in in this paper were undertaken using the SMAUG code, a GPU implementation of the Sheffield Advanced Code (SAC) \citet{Shelyag2008}. The Sheffield MHD Accelerated Using GPUs (SMAUG) \citet{Griffiths2015} and SAC  are derived from the versatile advection code (VAC) developed by \citet{Toth1996}. SAC and SMAUG are numerical MHD solvers which can be used to model the time-dependent evolution of photospheric oscillations in the solar atmosphere. The SMAUG code can simulate linear and non-linear wave propagation in strongly magnetised plasma with structuring and stratification.
 
-We use the same general system of ideal MHD equations applicable to an ideal compressible plasma and used for the hydrodynamic simulations \citet{Griffiths2018b}.
+We use the same general system of ideal MHD equations applicable to an ideal compressible plasma and used for our initial hydrodynamic simulations, \citet{Griffiths2018b}.
 \begin{eqnarray}
 && {{\partial \rho}\over{\partial t}}+\nabla\cdot\left( \rho{\mathbf v}\right)=0, \label{e1} \\
 && {{\partial ( \rho {\bf v})}\over{\partial t}}+\nabla\cdot\left( {\bf v}\rho {\bf v}-{\bf B B}\right)+\nabla p_t=\rho{\bf g}, \label{e2}\\
@@ -420,30 +436,32 @@ Assuming a magneto-hydrostatic equilibrium of the background plasma, the backgro
 
 \begin{figure}[h]\label{inimagfieldplot}
 \centering
-\includegraphics[scale=0.475]{bfield100G.jpg}
+\includegraphics[scale=0.2]{bfield100G.jpg}
 \caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
 \end{figure}
 
 \break
 
 \section{Computational Model}
-
-
-The hydrodynamical studies reported in  \citet{Griffiths2018b} employed simulation drivers with physical characteristics representing p-mode oscillations with varying modes and periods. The MHD simulations reported here  used a model of the solar atmosphere and included a uniform vertical cylindrically symmetric magnetic field.
+The hydrodynamical studies reported in  \citet{Griffiths2018b} employed simulation drivers with physical characteristics representing p-mode oscillations with varying modes and periods. The MHD simulations reported here use the same driver and model of the solar atmosphere as used in our initial hydrodynamical study. The model is modified by the inclusion of a uniform, vertical and cylindrically symmetric magnetic field. 
 
  The dimensions of the simulation box are $L_{ x}= 4$ Mm,  $L_{y} =4$ Mm and with a height of $L_{z} =6$ Mm in the gravitationally stratified $z$-direction. The computational box is an array of elements $128 \times128 \times128 $. The upper boundary of the model is in the solar corona whilst the lower boundary is coincident with the photosphere. The perturbed MHD code used here is suited to studying the propagation of wave energy from the photosphere, across the transition layer and leaking into the solar corona. The time scales relevant to our study are determined by the 5-minute $p$-mode oscillations the model employs open boundary conditions thereby allowing us to model the wave propagation. To generate these oscillations we use vertical velocity drivers which are extended across the base of the model. The following sections describe the model solar atmosphere and the driver.
 
-Data obtained from solar observations was used to construct a semi-empirical model solar atmosphere, the resulting model is a representation of the quiet sun. Employing the fundamental assumption of hydrostatic equilibrium, the VALIIIc model \citet{Vernazza1981} was used to construct a model of the chromosphere in equilibrium. For atmospheric heights greater than 2.5 Mm the results from a model of solar coronal heating were used \citet{McWhirter1975}. A further possiblity for a model solar atmosphere is the use of parametric models, the smoothed step function used by \citet{Murawski2010} is an example. Discussion of the validity of model solar atmospheres and realistic models of the chromosphere,  indicate the need for observationally derived semi-empirical models, see \citet{Carlsson1995}, \citet{Kalkofen2012}. It has been suggested that local dynamo action and joule heating in the dynamical solar chromosphere make the construction of models particularly challenging \citet{Leenaarts2011}.
+Data obtained from solar observations was used to construct a semi-empirical model solar atmosphere, the resulting model is a representation of the quiet sun. Employing the fundamental assumption of hydrostatic equilibrium, the VALIIIc model \citet{Vernazza1981} was used to construct a model of the chromosphere in equilibrium. For atmospheric heights greater than 2.5 Mm the results from a model of solar coronal heating were used \citet{McWhirter1975}. The atmospheric profiles for temperature, density, sound speed and frequency cut-off for this model are shown in figure \ref{soundspeedVAL3C_profile_fig1R}. A further possiblity for a model solar atmosphere is the use of parametric models, the smoothed step function used by \citet{Murawski2010} is an example. Discussion of the validity of model solar atmospheres and realistic models of the chromosphere,  indicate the need for observationally derived semi-empirical models, see \citet{Carlsson1995}, \citet{Kalkofen2012}. It has been suggested that local dynamo action and joule heating in the dynamical solar chromosphere make the construction of models particularly challenging \citet{Leenaarts2011}.
 
-For the simulations described here we use a simplistic model which is uniform in the vertical (z) direction. The cylindrically symmetric field was constructed using  the parametrisation in equation \ref{e7}, the effective cylinder radius was fixed at $R=0.14Mm$. Simulations were run for different values of $B_{max}$.
+For the simulations described here we use a simplistic model which is uniform in the vertical (z) direction. The cylindrically symmetric field was constructed using  the parametrisation in equation \ref{e7}, the effective cylinder radius was fixed at $R=0.14$Mm. Simulations were run for different values of $B_{max}$.
 
 \begin{equation}
 B_{z}=B_{max} e^{-\frac{x^2+y^2}{R^2}} , \label{e7}
 \end{equation}
 
-Since the field is uniform in the vertical direction the model atmosphere in hydrostatic equilibrium is in magnetohydrostatic equilibrium. Details of the construction procedure for the model atmosphere, the resulting density profiles and temperature profiles are provided in \citet{Griffiths2018b}. 
+Since the field is uniform in the vertical direction the model atmosphere is in magnetohydrostatic equilibrium. Details of the construction procedure for the model atmosphere, the resulting density profiles and temperature profiles are provided in \citet{Griffiths2018b}. 
  
-
+\begin{figure}[h]\label{soundspeedVAL3C_profile_fig1R}
+\includegraphics[scale=0.15]{solatmosprofiles.jpg}
+\caption{The left hand panel shows the temperature and density profile used for the simulations and based on the VALIIIc model. The right hand panel shows the computed soundspeed and frequency cutoff for a solar model atmosphere based on the VALIIIc model.}
+%%\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
+\end{figure}
 
 \section{Numerical Drivers for $p$-mode Oscillations}
 
@@ -480,14 +498,14 @@ For the  simulations here, a p-mode driver corresponding to the 5 minute mode, w
 
 
 
-\begin{figure*}\label{vzplot_dif_bv100g_0g_76_150_225}
-\includegraphics[scale=0.146]{vzplot_dif_bv100g_0g_76_150_225.jpg}
-\caption{Vertical Component of the Velocity Difference for two different magnetic field configurations for Different Sections of the Simulation for 76s, 150s and 225s for a magnetic field of 0G.}
+%\begin{figure*}\label{vzplot_bv100g_0g_76_150_225}
+%\includegraphics[scale=0.146]{vzplot_bv100g_76_150_225.jpg}
+%\caption{Vertical Component of the Velocity for Different Sections of the Simulation for 76s, 150s and 225s for a magnetic field of 100G.}
 %\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
-\end{figure*}
+%\end{figure*}
 
 
-For the driver equation given in \ref{e8}, $T_{s}$ is the period, $A_{nm}$ is the amplitude, the indices $n$ and $m$ define the mode, the lengths of the base of the simulation box in the $x$ and $y$ directions are $L_{x}$ and $L_{y}$ are  respectively. The driver width, $\Delta z$ is set to $4km$, the parameter $z_{0}$ was set so that the vertical location of the driver is in the photosphere, coincident with the location of the temperature minimum and 0.5 Mm above the lower boundary of the model. The simulations presented use the parameter $A_{nm}$=500\, ms$^{-1}$ with the mode indices set to $n,m=2$. 
+For the driver equation given in \ref{e8}, $T_{s}$ is the period, $A_{nm}$ is the amplitude, the indices $n$ and $m$ define the mode, the lengths of the base of the simulation box in the $x$ and $y$ directions are $L_{x}$ and $L_{y}$ are  respectively. The driver width, $\Delta z$ is set to $4$km, the parameter $z_{0}$ was set so that the vertical location of the driver is in the photosphere, coincident with the location of the temperature minimum and 0.5 Mm above the lower boundary of the model. The simulations presented use the parameter $A_{nm}$=500\, ms$^{-1}$ with the mode indices set to $n,m=2$. 
 
 
 
@@ -495,10 +513,10 @@ For the driver equation given in \ref{e8}, $T_{s}$ is the period, $A_{nm}$ is th
 %\ref{vzplot_bv0g_76_150_225} , \ref{vzplot_bv50g_76_150_225} , \ref{vzplot_bv75g_76_150_225} and 
 
 \section{Magnetoacoustic Waves in Uniform Vertical Magnetic Field Configurations}
-Magnetohydrodynamic simulations have been performed with p-mode oscillations of the photospheric layer and for magnetic field strengths of 0G, 50G, 75G and 100G. The plasma $\beta$ for the model decreases rapidly from a value of 12 at the lower boundary of the simulation domain, $\beta$ decreases to 1 at a height of 0.5Mm.  From the top of the transition layer to the upper boundary of the model $\beta $ has a constant value of $1\times 10^{-6}$. It is anticipated that for the region with $\beta \approx 1$, mode conversion occurs with full or partial conversion to magnetohydrodynamic modes. 
+Magnetohydrodynamic simulations have been performed with p-mode oscillations of the photospheric layer and for magnetic field strengths of 0G, 50G, 75G and 100G. The plasma $\beta$ for the model decreases rapidly from a value of 50 at 0.7Mm above the lower boundary of the simulation domain, $\beta$ decreases to 1 at a height of 1.39Mm.  It is anticipated that for the region with $\beta \approx 1$, mode conversion occurs with full or partial conversion to magnetohydrodynamic modes. 
 
  %% Figure 3  \ref{vzplot_bv100g_76_150_225}
- Figure 3 shows the vertical component of the velocity at various times for different sections through the simulation box. Each plot in  figure 3 corresponds to a vertical field configuration with a maximum field strength ( $ B_{max} $ ) of 100G. Referring to \citet{Griffiths2018b}, there is a clear difference between the purely hydrodynamic, 0G case and the MHD cases. The figures exhibit evidence of a fast moving magneto-acoustic wave mode. These figures compare the wave modes at a quarter, half and three-quarters of a cycle. The propagation speed is consistent with that of a fast magneto-acoustic mode. Our results indicated that even a small magnetic field appears to enhance the motion of plasma in the corona and  there is an apparent difference in phase between the magnetic field cases. As well as an increase in the velocity amplitude with increasing magnetic field there is a small shift in the frequency of the oscillation. For magnetic fields with strengths between $1kG$ and$50G$, the theoretical prediction of \citet{Hindman1996} resulted in frequency shifts in the microhertz and nanohertz range,  although this was a helioseismology prediction it provides insight into the mechanism of frequency shifts of waves in atmospheric magnetic structures. 
+ Figure \ref{vzplot_bv100g_76_150_225} shows the vertical component of the velocity at various times for different sections through the simulation box. Each plot in  figure \ref{vzplot_bv100g_76_150_225} corresponds to a vertical field configuration with a maximum field strength ( $ B_{max} $ ) of 100G. Comparison with the 0G case in figure \ref{vzplot_bv0g_76_150_225}, illustrates a clear difference between the purely hydrodynamic and the MHD case. The figures for the MHD case exhibit evidence of a fast moving magneto-acoustic wave mode. These figures compare the wave modes at a quarter, half and three-quarters of a cycle. The propagation speed is consistent with that of a fast magneto-acoustic mode. Our results indicated that even a small magnetic field appears to enhance the motion of plasma in the corona and  there is an apparent difference in phase between the magnetic field cases. As well as an increase in the velocity amplitude with increasing magnetic field there is a small shift in the frequency of the oscillation. For magnetic fields with strengths between $1$kG and$50$G, the theoretical prediction of \citet{Hindman1996} resulted in frequency shifts in the microhertz and nanohertz range,  although this was a helioseismology prediction it provides insight into the mechanism of frequency shifts of waves in atmospheric magnetic structures. 
 
 A set of videos of all the simulations that were performed can be obtained from the online research data archive hosted by The University of Sheffield \citet{Griffiths2018a}. The videos display the evolution of the $z$-component of the plasma velocity along different layers of our model solar atmosphere. Each video shows the value of the vertical component of the plasma velocity ($z$-component in m/s) along different slices through the simulation box. Each video is labelled using the magnetic field strength in Gauss.
 
@@ -540,13 +558,13 @@ Wave Speed (km/s)   &  0G  &  50G &  75G & 100G\\
 \hline
 Magnetic Field (G)   &  1Mm  &  2Mm &  4Mm & 5.5Mm \\
 \hline
-0G & 0.2625  &    0.0021      &   1.4846 x $10^{-6}$     &   1.7399 x $10^{-6}$      \\
+0G & 0.155  &    -1.771 x $10^{-5}$      &   1.227 x $10^{-6}$     &   8.194 x $10^{-7}$      \\
 \hline
-50G & 0.5401  &   -4.9441       &   0.882      &  0.5417     \\
+50G & 0.270  &   -0.399       &   0.040      &  0.021     \\
 \hline
-75G & 0.1978  &    -1.576 x $10^{-4}$      &   1.1586 x $10^{-6}$     &   8.1936 x $10^{-7}$      \\
+75G & -0.507  &    -0.126      &   0.015     &   0.007      \\
 \hline
-100G & 0.0165  &   -1.8664      &   0.7116      &   0.4092    \\
+100G & -0.255  &   -0.226      &   0.019      &   0.006    \\
 \hline
 
 \end{tabular} 
@@ -568,14 +586,14 @@ Magnetic Field (G)   &  1Mm  &  2Mm &  4Mm & 5.5Mm \\
 %\caption{Initial Magnetic Field Configuration, radial field distribution, uniform in the vertical direction with a maximum value of 100G }
 %\end{figure}
 
-\begin{figure}
-\centering
-\label{td_vert_bv100G_300_with_bandbeta}
+%\begin{figure}
+%\centering
+%\label{td_vert_bv100G_300_with_bandbeta}
 %\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
-\includegraphics[scale=0.25]{td_vert_bv100G_300_with_bandbeta.jpg}
-\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, contours show the reciprocal of the plasma beta also shown are contours for the perturbed magnetic field.}
+%\includegraphics[scale=0.25]{td_vert_bv100G_300_with_bandbeta.jpg}
+%\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, contours show the reciprocal of the plasma beta also shown are contours for the perturbed magnetic field.}
 %\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
-\end{figure}
+%\end{figure}
 
 \begin{figure}
 \centering
@@ -592,7 +610,7 @@ Magnetic Field (G)   &  1Mm  &  2Mm &  4Mm & 5.5Mm \\
 \label{td_vert_bv100G_300_with_bandbeta}
 %\includegraphics[scale=0.475]{dt_vvert_100G_300s_180s.jpg}
 \includegraphics[scale=0.25]{td_vert_bv100G_300_with_bandbeta.jpg}
-\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, for the case with magnetic field of 100G, showing the line of beta equal to 0.97 and contours for the perturbed magnetic field}
+\caption{Distance-time plot of the vertical component of the velocity in the mid chromosphere, for the case with magnetic field of 100G, showing  contours for the perturbed magnetic field, the horizontal lines are contours for the plasma beta. The lower, middle and upper lines correspond to values for the plasma beta of 50, 0.97 and 0.5 respectively.}
 %\caption{Energy Flux for the mid-section of the Simulation for 76s, 150s, 225s and 330s for a vertical field with maximum field of 50G }
 \end{figure}
 
@@ -622,7 +640,7 @@ These expression are dependent on the perturbed kinetic pressure $\tilde{p}_{k}$
 $$
 \tilde{p}_{k}=\left(\gamma - 1\right)\left( \tilde{e}-\frac{ \left( \tilde{\rho} +\rho_b \right){\mathbf v}^2}{2}-\frac{{\mathbf B}^2}{2}\right).
 $$
-Using equation (\ref{e11}), we computed the energy flux integral for each of the drivers at different atmospheric heights and averaged over the total time. We compute the ratio of this integrated energy flux to the integrated energy flux at the location of the driver, the resulting values are shown in table 2 . With the exception of the 75G field case it appears that the energy flux is enhanced for increasing values for the vertical magnetic field. In figure 5  we plot the ratio of the integrated energy flux ratio for different values of the field at different heights and for the different vertical field values ( the blue, orange and red  are for field values of 50G, 75G and 100G respectively). This plot demonstrates that for higher B-field magnitudes the energy propagation is suppressed, this is interesting because this is consistent with observations and other simulation results which demonstrate an enhancement for inclined fields.
+Using equation (\ref{e11}), we computed the energy flux integral for each of the drivers at different atmospheric heights and averaged over the total time. We compute the ratio of this integrated energy flux to the integrated energy flux at the location of the driver, the resulting values are shown in table 2 . It appears that for heights greater than 4Mm, the energy flux is enhanced for increasing values for the vertical magnetic field. In figure \ref{energyfluxratio_50G_75G_100G_line},  we plot the ratio of the integrated energy flux ratio for different values of the field at different heights and for the different vertical field values ( the blue, orange and red  are for field values of 50G, 75G and 100G respectively). This plot demonstrates that for higher B-field magnitudes there is a small leakage of energy propagation, this is interesting because this is consistent with observations and other simulation results which demonstrate an enhancement for inclined fields.
 
 
 %% \ref{energyfluxratio_50G_75G_100G_line}. figure 5 above
@@ -635,7 +653,7 @@ Using equation (\ref{e11}), we computed the energy flux integral for each of the
 \begin{figure}
     \label{energyfluxratio_50G_75G_100G_line}
     \centering
-    \includegraphics[scale=0.425]{energyfluxratio.jpg}
+    \includegraphics[scale=0.2]{energyfluxratio.jpg}
     \caption{Shows the Ratio of the Integrated Energy Flux ratio for different values of the field, Blue 50G, Orange 75G, Red 100GMm}
 \end{figure}
 
@@ -660,13 +678,13 @@ Using equation (\ref{e11}), we computed the energy flux integral for each of the
 
 \section{Frequency Analysis}
 
-The top panel of Figure \ref{fft_sim} shows a vertical slice of $Bz$ over time, this is based on the simulation with the initial magnetic field configuration with a maximum value of 100 $G$. The vertical axis represents the height in $Mm$ and the horizontal axis is the time dimension, measured in seconds. From this 2-dimensional plane, we selected $5$ layers, indicated by vertical grey lines. The middle panel of Figure \ref{fft_sim} displays the temporal variation of the selected layers, indicated by different grey shade colours. The time series do not feature non-stationary behaviour, therefore, further transformations (such as de-trending, smoothing or differentiation) are not needed. The Hanning-window function is still applied to avoid leakage effects when performing the Fast Fourier Transformation (FFT).  
+The top panel of Figure \ref{fft_sim} shows a vertical slice of $Bz$ over time, this is based on the simulation with the initial magnetic field configuration with a maximum value of $100$G. The vertical axis represents the height in Mm and the horizontal axis is the time dimension, measured in seconds. From this 2-dimensional plane, we selected $5$ layers, indicated by vertical grey lines. The middle panel of Figure \ref{fft_sim} displays the temporal variation of the selected layers, indicated by different grey shade colours. The time series do not feature non-stationary behaviour, therefore, further transformations (such as de-trending, smoothing or differentiation) are not needed. The Hanning-window function is still applied to avoid leakage effects when performing the Fast Fourier Transformation (FFT).  
 
-An FFT is applied (the lower panel) for investigating any oscillatory behaviour in the analysed signal. A significant oscillatory pattern is found with frequency range of $3.75$ - $4$ $mHz$, corresponding a period range of $4.2$ - $4.4$ minutes. FFT was also performed based on other simulations with different initial magnetic field configurations (with a maximum value of 0 $G$, 50 $G$ 75 $G$ and 100 $G$). These investigations all showed similar oscillatory behaviour, therefore, we present one FFT as a representative example. 
+An FFT is applied (the lower panel) for investigating any oscillatory behaviour in the analysed signal. A significant oscillatory pattern is found with frequency range of $3.75$ - $4$mHz , corresponding a period range of $4.2$ - $4.4$ minutes. FFT was also performed based on other simulations with different initial magnetic field configurations (with a maximum value of $0$G , $50$G  $75$G  and $100$G ). These investigations all showed similar oscillatory behaviour, therefore, we present one FFT as a representative example. 
 
-Next, temporal analysis for observational data is performed for confirming the obtained oscillatory behaviour. We investigate intensity oscillations in the solar atmosphere observed by SDO/AIA. The passband 1600 {\AA} is selected because our simulation mainly focuses on lower atmospheric regions, i.e. photosphere and chromosphere. The cadence of 1600 {\AA} images is 24 seconds, therefore it is suitable for studying relatively high-frequency oscillations such as the obtained $4$ $mHz$.
+Next, temporal analysis for observational data is performed for confirming the obtained oscillatory behaviour. We investigate intensity oscillations in the solar atmosphere observed by SDO/AIA. The passband 1600 {\AA} is selected because our simulation mainly focuses on lower atmospheric regions, i.e. photosphere and chromosphere. The cadence of 1600 {\AA} images is 24 seconds, therefore it is suitable for studying relatively high-frequency oscillations such as the obtained $4$mHz.
 
-The initial magnetic field configuration of our model is a standing magnetic tube, passing through the chromosphere and the lower corona. Therefore, We chose to sample a typical active region. The selected area contains a small sunspot (solar pore), presumably featuring similar magnetic structure as our simulation. From each observation, a single pixel is selected, yielding a $0.35$ $Mm$ by $0.35$ $Mm$ area. The obtained time series shows non-stationary behaviour, therefore, the observed linear trend is removed by taking the first difference $\Delta  y_{t}$ of the data. The first difference is defined as the difference between consecutive observations $y_{t}$ and $y_{t-1}$. Furthermore, the times series is also normalised by applying standard scores (Z-scores), defined by:
+The initial magnetic field configuration of our model is a standing magnetic tube, passing through the chromosphere and the lower corona. Therefore, We chose to sample a typical active region. The selected area contains a small sunspot (solar pore), presumably featuring similar magnetic structure as our simulation. From each observation, a single pixel is selected, yielding a $0.35$Mm  by $0.35$Mm  area. The obtained time series shows non-stationary behaviour, therefore, the observed linear trend is removed by taking the first difference $\Delta  y_{t}$ of the data. The first difference is defined as the difference between consecutive observations $y_{t}$ and $y_{t-1}$. Furthermore, the times series is also normalised by applying standard scores (Z-scores), defined by:
 
 \begin{equation}
 	Z_{i} = \frac {T_{i} - \overline{T}}  {\sigma(T)},
@@ -679,9 +697,15 @@ where, the parameter $\overline{T}$ is the mean of the time series and the param
     S = \overline{N_{b}} + 3 \sigma(N_{b}).
 \end{equation}
 
-A significant period is found with frequency range of $4-4.2$ $mHz$, corresponding a period range of $4$ - $4.2$ minutes, which is close to the period found in simulation data. Another significant peak is found with period around $3$ minutes which may be an indication of another global oscillation.
+A significant period is found with frequency range of $4-4.2$mHz , corresponding a period range of $4$ - $4.2$ minutes, which is close to the period found in simulation data. Another significant peak is found with period around $3$ minutes which may be an indication of another global oscillation.
 
 \section{Conclusion}
+
+
+{\bcr A number of helioseismic studies have shown that high frequency pmodes can leak into the upper atmosphere (though are evanescent) without magnetic fields. Comparing quiet sun and magnetic observations is vital before you make any connections with the model. Finally, the authors conclude that their spectral analysis shows a larger shift than whats been previously observed by hindman et al. 1996, but then state that this is explained in part by the work of Campbell and Roberts 1989. Campbell and Roberts state very different behavior depending on the radial order $n$ and harmonic degree $\ell$. If the observed frequency shift is consistent with what Campbell and Roberts find, the authors should explain why. Is it because your source term emulates certain ell and n modes. What happens with your spectral results when you change the source term. A meaningful discussion is required here if the reader is to gain any insight into the physics at play.
+
+}
+
 
 In this paper we have presented results for a series of MHD simulations of an extended oscillator at the base of a model solar atmosphere. We have shown that energy is propagated by magnetosonic modes. Slow and fast magnetosonic modes are responsible for carrying some energy back to the chromosphere and the photosphere. The results exhibit a small frequency shift  for different values of the magnetic field closer inspection of the energy flux propagation results indicative of enhanced energy flux propagation for inclined magnetic fields. The obtained periodic behaviour is confirmed by observational data, featuring similar frequencies based on the intensity times series of SDO images. The frequency shift measured from the temporal analysis of the observational and simulation data is larger than would be expected from the analysis of \citet{Hindman1996}. This can be understood in part by referring to the work of \citet{Campbell1989}.
 
@@ -962,6 +986,4 @@ A.~{V{\"o}gler}, S.~{Shelyag}, M.~{Sch{\"u}ssler}, F.~{Cattaneo}, T.~{Emonet},
 \end{document}
 
 % End of file `sample63.tex'.
-
-
 
