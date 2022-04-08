@@ -18,7 +18,7 @@ matfile=[directory,'pvvt.mat'];
 
 %load(matfile);
 
-evelv=evel2Mm_vh;
+evelv=evel2Mm_vh_0G;
 ss1=evelv;
 sz=size(evelv);
 nt=sz(1);
