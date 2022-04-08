@@ -388,7 +388,7 @@ clear tmp;
        end
  
   
-     minval=-6;
+     minval=-;
      maxval=6;
   cmap=colormap(jet(256));
   caxis([minval maxval]);
@@ -421,7 +421,7 @@ clear tmp;
 %   
   % xlabel(hc,'Vz [m/s]');
   %hc.Label.String = 'Vz [m/s]';
-  title(hc,'Vz');
+  title(hc,'Vz [m/s]');
     hold off
 
 %nexttile 

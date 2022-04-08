@@ -18,7 +18,7 @@ matfile=[directory,'pvvt.mat'];
 
 %load(matfile);
 evelv0G=evel2Mm_vh_0G;
-evelv=evel2Mm_vh(1:617,:)-evelv0G;
+evelv=(evel2Mm_vh(1:617,:)-evelv0G)./(evel2Mm_vh(1:617,:)+evelv0G);
 ss1=evelv;
 sz=size(evelv);
 nt=sz(1);
@@ -38,9 +38,9 @@ test=(((ss2-(min(min(ss2(:,1:700)))))*1000000));
  c.LineWidth = 2;
 
 
-ss3=1e4*(evel2Mm_bet)'; %plotting 1/beta
- [M,c]=contour(ss3(1:45,1:600),1,'linecolor','r');
- c.LineWidth = 2; 
+%ss3=1e4*(evel2Mm_bet)'; %plotting 1/beta
+ %[M,c]=contour(ss3(1:45,1:600),1,'linecolor','r');
+ %c.LineWidth = 2; 
  
  
 zlimv=3*[-1 1];
