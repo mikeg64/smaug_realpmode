@@ -421,7 +421,8 @@ clear tmp;
 %   
   % xlabel(hc,'Vz [m/s]');
   %hc.Label.String = 'Vz [m/s]';
-  title(hc,'Vz');
+  
+  title(hc,{'Normalised'; 'Difference'; 'for Vz'});
     hold off
 
 %nexttile 
